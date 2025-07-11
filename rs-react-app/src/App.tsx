@@ -1,10 +1,13 @@
 import './App.css';
+import { Results } from './Results';
+import { Search } from './Search';
 
 function App() {
   return (
     <>
       <main className="main">
-        <h1>First Task</h1>
+        <Search />
+        <Results />
       </main>
     </>
   );

@@ -1,0 +1,11 @@
+.resultHeader {
+  display: flex;
+}
+
+.columnName {
+  width: 30%;
+}
+
+.columnDescription {
+  width: 70%;
+}
