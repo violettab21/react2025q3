@@ -1,11 +1,4 @@
-.resultHeader {
+.resultsContainer {
   display: flex;
-}
-
-.columnName {
-  width: 30%;
-}
-
-.columnDescription {
-  width: 70%;
+  flex-direction: column;
 }

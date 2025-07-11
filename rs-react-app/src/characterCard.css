@@ -1,0 +1,11 @@
+.cardContainer {
+  display: flex;
+}
+
+.characterImageContainer {
+  width: 30%;
+}
+
+.characterImage {
+  width: 100%;
+}
