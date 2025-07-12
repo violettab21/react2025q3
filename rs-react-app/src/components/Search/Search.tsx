@@ -1,19 +1,18 @@
 import { Component } from 'react';
 import './search.css';
-import { saveToLocalStorage } from './helpers';
+import { getStoredSearchTerm, saveToLocalStorage } from '../../helpers';
 
 export class Search extends Component<{
   handleSearch: (searchTerm: string) => Promise<void>;
-  searchTerm: string;
 }> {
   state: { currentSearchValue: string } = {
-    currentSearchValue: this.props.searchTerm,
+    currentSearchValue: getStoredSearchTerm(),
   };
 
   render() {
     return (
       <div className="searchContainer">
-        <p className="searchLabel">Search for Rick and Morty character</p>
+        <p className="searchLabel">Search for Rick and Morty character:</p>
         <input
           className="searchInput"
           placeholder="Search"

@@ -1,6 +1,5 @@
 import { Component } from 'react';
-import './search.css';
-import type { Character } from './types';
+import type { Character } from '../../types';
 import './characterCard.css';
 
 export class CharacterCard extends Component<{ character: Character }> {

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import './results.css';
-import type { Character } from './types';
-import { CharacterCard } from './CharacterCard';
+import type { Character } from '../../types';
+import { CharacterCard } from '../CharacterCard/CharacterCard';
 
 export class Results extends Component<{
   characters: Character[];
