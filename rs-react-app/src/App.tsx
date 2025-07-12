@@ -5,6 +5,8 @@ import { Search } from './Search';
 import type { Character, CharactersResponse } from './types';
 import { getStoredSearchTerm } from './helpers';
 import { url, GENERIC_ERROR, NOT_FOUND_MESSAGE } from './constants';
+import { ErrorBoundary } from './ErrorBoundary';
+import { ErrorButton } from './ErrorButton';
 
 export class App extends Component {
   state: {
@@ -54,15 +56,18 @@ export class App extends Component {
     return (
       <>
         <main className="main">
-          <Search
-            handleSearch={this.handleSearch}
-            searchTerm={this.state.searchTerm}
-          />
-          <Results
-            characters={this.state.results}
-            isLoading={this.state.isLoading}
-            error={this.state.requestError}
-          />
+          <ErrorBoundary fallback={GENERIC_ERROR}>
+            <Search
+              handleSearch={this.handleSearch}
+              searchTerm={this.state.searchTerm}
+            />
+            <Results
+              characters={this.state.results}
+              isLoading={this.state.isLoading}
+              error={this.state.requestError}
+            />
+            <ErrorButton />
+          </ErrorBoundary>
         </main>
       </>
     );
