@@ -3,13 +3,20 @@ import './results.css';
 import type { Character } from './types';
 import { CharacterCard } from './CharacterCard';
 
-export class Results extends Component<{ characters: Character[] }> {
+export class Results extends Component<{
+  characters: Character[];
+  isLoading: boolean;
+}> {
   render() {
     return (
       <div className="resultsContainer">
-        {this.props.characters.map((character) => (
-          <CharacterCard key={character.id} character={character} />
-        ))}
+        {this.props.isLoading ? (
+          <span className="loader"></span>
+        ) : (
+          this.props.characters.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))
+        )}
       </div>
     );
   }

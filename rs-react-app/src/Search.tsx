@@ -1,4 +1,4 @@
-import { Component, createRef } from 'react';
+import { Component } from 'react';
 import './search.css';
 import { saveToLocalStorage } from './helpers';
 
@@ -6,7 +6,6 @@ export class Search extends Component<{
   handleSearch: (searchTerm: string) => Promise<void>;
   searchTerm: string;
 }> {
-  inputRef = createRef<HTMLInputElement>();
   state: { currentSearchValue: string } = {
     currentSearchValue: this.props.searchTerm,
   };
@@ -14,28 +13,22 @@ export class Search extends Component<{
   render() {
     return (
       <div className="searchContainer">
+        <p className="searchLabel">Search for Rick and Morty character</p>
         <input
           className="searchInput"
           placeholder="Search"
-          ref={this.inputRef}
           value={this.state.currentSearchValue}
-          onChange={() => {
-            if (this.inputRef.current) {
-              this.setState({
-                currentSearchValue: this.inputRef.current.value,
-              });
-            }
+          onChange={(e) => {
+            this.setState({
+              currentSearchValue: e.target.value,
+            });
           }}
         ></input>
         <button
           className="searchButton"
           onClick={() => {
-            let searchTerm = '';
-            if (this.inputRef.current) {
-              searchTerm = this.inputRef.current.value;
-            }
-            void this.props.handleSearch(searchTerm);
-            saveToLocalStorage(searchTerm);
+            void this.props.handleSearch(this.state.currentSearchValue);
+            saveToLocalStorage(this.state.currentSearchValue);
           }}
         >
           Search

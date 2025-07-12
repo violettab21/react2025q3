@@ -1,5 +1,8 @@
 .cardContainer {
   display: flex;
+  justify-self: start;
+  gap: 2rem;
+  width: 100%;
 }
 
 .characterImageContainer {
@@ -8,4 +11,8 @@
 
 .characterImage {
   width: 100%;
+}
+
+.characrearInfo {
+  width: 70%;
 }
