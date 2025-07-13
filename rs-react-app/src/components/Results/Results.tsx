@@ -9,7 +9,8 @@ export class Results extends Component<{
   error: string;
 }> {
   render() {
-    if (this.props.error) return <p>{this.props.error}</p>;
+    if (this.props.error)
+      return <p className="errorMessage">{this.props.error}</p>;
     return (
       <div className="resultsContainer">
         {this.props.isLoading ? (

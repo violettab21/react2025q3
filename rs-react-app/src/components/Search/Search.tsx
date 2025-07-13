@@ -26,8 +26,9 @@ export class Search extends Component<{
         <button
           className="searchButton"
           onClick={() => {
-            void this.props.handleSearch(this.state.currentSearchValue);
-            saveToLocalStorage(this.state.currentSearchValue);
+            const search = this.state.currentSearchValue.trim();
+            void this.props.handleSearch(search);
+            saveToLocalStorage(search);
           }}
         >
           Search

@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import './errorBoundare.css';
 
 export class ErrorBoundary extends Component<{
   fallback: string;
@@ -19,7 +20,7 @@ export class ErrorBoundary extends Component<{
   render() {
     if (this.state.isError) {
       return (
-        <>
+        <div className="fallbackContainer">
           <p>{this.props.fallback}</p>
           <button
             className="recoveryButton"
@@ -29,7 +30,7 @@ export class ErrorBoundary extends Component<{
           >
             Try again
           </button>
-        </>
+        </div>
       );
     }
 

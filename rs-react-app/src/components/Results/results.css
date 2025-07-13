@@ -1,8 +1,13 @@
 .resultsContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
+}
+
+.errorMessage {
+  text-align: center;
 }
 
 .loader {

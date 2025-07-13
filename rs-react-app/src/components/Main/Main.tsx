@@ -60,12 +60,12 @@ export class Main extends Component {
       <main className="main">
         <ErrorBoundary fallback={GENERIC_ERROR}>
           <Search handleSearch={this.handleSearch} />
+          <ErrorButton />
           <Results
             characters={this.state.results}
             isLoading={this.state.isLoading}
             error={this.state.requestError}
           />
-          <ErrorButton />
         </ErrorBoundary>
       </main>
     );

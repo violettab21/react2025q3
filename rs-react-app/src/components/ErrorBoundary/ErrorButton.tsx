@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './errorBoundare.css';
 
 export class ErrorButton extends Component {
   state = {
@@ -13,11 +14,12 @@ export class ErrorButton extends Component {
     return (
       <div className="errorButtonContainer">
         <button
+          className="errorButton"
           onClick={() => {
             this.setState({ isErrorClicked: true });
           }}
         >
-          Error
+          Emulate Error
         </button>
       </div>
     );
