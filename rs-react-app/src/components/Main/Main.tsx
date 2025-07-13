@@ -21,6 +21,7 @@ export class Main extends Component {
 
   async handleCharactersRequest(endpoint: string): Promise<void> {
     try {
+      this.setState({ isLoading: true });
       const response = await fetch(endpoint);
 
       this.setState({ isLoading: false });
