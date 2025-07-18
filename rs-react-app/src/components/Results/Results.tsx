@@ -10,7 +10,11 @@ export class Results extends Component<{
 }> {
   render() {
     if (this.props.error)
-      return <p className="errorMessage">{this.props.error}</p>;
+      return (
+        <p data-testid="errorMessage" className="errorMessage">
+          {this.props.error}
+        </p>
+      );
     return (
       <div className="resultsContainer">
         {this.props.isLoading ? (
