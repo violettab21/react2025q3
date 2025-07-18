@@ -14,7 +14,7 @@ export class Results extends Component<{
     return (
       <div className="resultsContainer">
         {this.props.isLoading ? (
-          <span className="loader"></span>
+          <span data-testid="loader" className="loader"></span>
         ) : (
           this.props.characters.map((character) => (
             <CharacterCard key={character.id} character={character} />
