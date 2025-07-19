@@ -27,8 +27,8 @@ export class Main extends Component {
       this.setState({ isLoading: false });
 
       if (response.ok) {
-        const resposeData: CharactersResponse = await response.json();
-        this.setState({ results: resposeData.results });
+        const responseData: CharactersResponse = await response.json();
+        this.setState({ results: responseData.results });
         this.setState({ requestError: '' });
       } else {
         if (response.status === 404) {

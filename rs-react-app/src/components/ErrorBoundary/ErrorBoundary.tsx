@@ -1,5 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import './errorBoundare.css';
+import './errorBoundary.css';
 
 export class ErrorBoundary extends Component<{
   fallback: string;

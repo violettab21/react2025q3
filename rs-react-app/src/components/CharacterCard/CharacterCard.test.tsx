@@ -3,15 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import '@testing-library/jest-dom';
 import { CharacterCard } from './CharacterCard';
-import type { Character } from '../../types';
-
-const character: Character = {
-  id: 1,
-  name: 'Rick Sanchez',
-  species: 'Human',
-  gender: 'Male',
-  image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-};
+import { character } from '../../__tests__/mocks';
 
 describe('Results component tests', () => {
   it('Check that CharacterCard component renders correctly', () => {

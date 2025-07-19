@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './errorBoundare.css';
+import './errorBoundary.css';
 
 export class ErrorButton extends Component {
   state = {
