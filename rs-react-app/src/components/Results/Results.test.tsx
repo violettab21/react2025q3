@@ -6,7 +6,7 @@ import { Results } from './Results';
 import { mockedCharactersList } from '../../__tests__/mocks';
 
 describe('Results component tests', () => {
-  it('Check that Results component renders correctly', () => {
+  it('Check that Results component renders with correct number of cards', () => {
     render(
       <Results characters={mockedCharactersList} isLoading={false} error={''} />
     );
@@ -14,7 +14,7 @@ describe('Results component tests', () => {
     expect(cards.length).toBe(mockedCharactersList.length);
   });
 
-  it('Check that Results component show loader when loading state', () => {
+  it('Check that Results component shows loader when loading state', () => {
     render(
       <Results characters={mockedCharactersList} isLoading={true} error={''} />
     );
@@ -24,7 +24,7 @@ describe('Results component tests', () => {
     expect(loader).toBeInTheDocument();
   });
 
-  it('Check that Results component show error when error message passed', () => {
+  it('Check that Results component shows error when error message passed', () => {
     const errorText = 'Error text';
 
     render(

@@ -5,13 +5,13 @@ import '@testing-library/jest-dom';
 import { MockedComponent } from '../../__tests__/mocks';
 import userEvent from '@testing-library/user-event';
 
-describe('Check ErrorBoundary Component', () => {
+describe('ErrorBoundary Component tests', () => {
   beforeAll(() => {
     console.error = vi.fn();
     console.log = vi.fn();
   });
 
-  it('Check Fallback error message is shown when error occurred on child component', () => {
+  it('Check Fallback error message is shown when error occurred in child component', () => {
     render(
       <ErrorBoundary fallback="Message">
         <MockedComponent />

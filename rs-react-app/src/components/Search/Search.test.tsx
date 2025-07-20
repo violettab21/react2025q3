@@ -1,11 +1,18 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Search } from './Search';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { LOCAL_STORAGE_KEY } from '../../constants';
 
+const mockedSearchHandler = vi.fn();
+
 describe('Search component tests', () => {
+  beforeEach(() => {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    vi.clearAllMocks();
+  });
+
   it('Check that search component renders correctly', () => {
     render(<Search handleSearch={async () => {}} />);
     const searchInput = screen.getByRole('textbox');
@@ -15,21 +22,18 @@ describe('Search component tests', () => {
   });
 
   it('Check that search handler is triggered on clicking Search', async () => {
-    const mock = vi.fn();
-
-    render(<Search handleSearch={mock} />);
+    render(<Search handleSearch={mockedSearchHandler} />);
     const searchButton = screen.getByRole('button');
 
     await userEvent.click(searchButton);
 
-    expect(mock).toBeCalled();
+    expect(mockedSearchHandler).toBeCalled();
   });
 
   it('Check that search handler is triggered with entered searchTerm', async () => {
-    const mock = vi.fn();
     const searchTerm = 'Rick';
 
-    render(<Search handleSearch={mock} />);
+    render(<Search handleSearch={mockedSearchHandler} />);
 
     const searchButton = screen.getByRole('button');
     const searchInput = screen.getByRole('textbox');
@@ -37,12 +41,10 @@ describe('Search component tests', () => {
     await userEvent.type(searchInput, searchTerm);
     await userEvent.click(searchButton);
 
-    expect(mock).toBeCalledWith(searchTerm);
+    expect(mockedSearchHandler).toBeCalledWith(searchTerm);
   });
 
   it('Check Search Input when local storage is empty', async () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
-
     render(<Search handleSearch={async () => {}} />);
 
     const searchInput = screen.getByRole('textbox');
@@ -63,7 +65,6 @@ describe('Search component tests', () => {
   });
 
   it('Check that searchTerm is saved to localStorage', async () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
     const searchTerm = 'Morty';
 
     render(<Search handleSearch={async () => {}} />);
@@ -80,11 +81,9 @@ describe('Search component tests', () => {
   });
 
   it('Check that searchTerm spaces are trimmed', async () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
     const searchTerm = '  Morty  ';
-    const mock = vi.fn();
 
-    render(<Search handleSearch={mock} />);
+    render(<Search handleSearch={mockedSearchHandler} />);
 
     const searchButton = screen.getByRole('button');
     const searchInput = screen.getByRole('textbox');
@@ -93,18 +92,16 @@ describe('Search component tests', () => {
     await userEvent.click(searchButton);
     const savedTerm = localStorage.getItem(LOCAL_STORAGE_KEY);
 
-    expect(mock).toBeCalledWith(searchTerm.trim());
+    expect(mockedSearchHandler).toBeCalledWith(searchTerm.trim());
     expect(savedTerm).toBe(searchTerm.trim());
   });
 
   it('Check that saved searchTerm is overwritten after searching with new term', async () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
     const searchTerm1 = 'Morty';
     localStorage.setItem(LOCAL_STORAGE_KEY, searchTerm1);
     const searchTerm2 = 'Rick';
-    const mock = vi.fn();
 
-    render(<Search handleSearch={mock} />);
+    render(<Search handleSearch={mockedSearchHandler} />);
 
     const searchButton = screen.getByRole('button');
     const searchInput = screen.getByRole('textbox');

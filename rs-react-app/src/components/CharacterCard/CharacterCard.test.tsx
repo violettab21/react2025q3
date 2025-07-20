@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import { CharacterCard } from './CharacterCard';
 import { character } from '../../__tests__/mocks';
 
-describe('Results component tests', () => {
+describe('CharacterCard component tests', () => {
   it('Check that CharacterCard component renders correctly', () => {
     render(<CharacterCard character={character} />);
     const card = screen.getByTestId('card');
