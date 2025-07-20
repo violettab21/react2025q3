@@ -5,7 +5,7 @@ import './characterCard.css';
 export class CharacterCard extends Component<{ character: Character }> {
   render() {
     return (
-      <div className="cardContainer">
+      <div data-testid="card" className="cardContainer">
         <div className="characterImageContainer">
           <img
             className="characterImage"

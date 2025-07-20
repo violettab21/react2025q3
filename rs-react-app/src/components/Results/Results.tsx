@@ -10,11 +10,15 @@ export class Results extends Component<{
 }> {
   render() {
     if (this.props.error)
-      return <p className="errorMessage">{this.props.error}</p>;
+      return (
+        <p data-testid="errorMessage" className="errorMessage">
+          {this.props.error}
+        </p>
+      );
     return (
       <div className="resultsContainer">
         {this.props.isLoading ? (
-          <span className="loader"></span>
+          <span data-testid="loader" className="loader"></span>
         ) : (
           this.props.characters.map((character) => (
             <CharacterCard key={character.id} character={character} />
