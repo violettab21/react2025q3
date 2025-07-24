@@ -1,30 +1,33 @@
-import { Component } from 'react';
 import './results.css';
 import type { Character } from '../../types';
 import { CharacterCard } from '../CharacterCard/CharacterCard';
 
-export class Results extends Component<{
+export const Results = ({
+  characters,
+  isLoading,
+  error,
+}: {
   characters: Character[];
   isLoading: boolean;
   error: string;
-}> {
-  render() {
-    if (this.props.error)
-      return (
-        <p data-testid="errorMessage" className="errorMessage">
-          {this.props.error}
-        </p>
-      );
+}) => {
+  if (error) {
     return (
-      <div className="resultsContainer">
-        {this.props.isLoading ? (
-          <span data-testid="loader" className="loader"></span>
-        ) : (
-          this.props.characters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))
-        )}
-      </div>
+      <p data-testid="errorMessage" className="errorMessage">
+        {error}
+      </p>
     );
   }
-}
+
+  return (
+    <div className="resultsContainer">
+      {isLoading ? (
+        <span data-testid="loader" className="loader"></span>
+      ) : (
+        characters.map((character) => (
+          <CharacterCard key={character.id} character={character} />
+        ))
+      )}
+    </div>
+  );
+};
