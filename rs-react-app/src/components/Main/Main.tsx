@@ -7,7 +7,8 @@ import { ErrorButton } from '../ErrorBoundary/ErrorButton';
 import { useCharacters } from './hooks/useCharacters';
 
 export const Main = () => {
-  const { results, isLoading, requestError, handleSearch } = useCharacters();
+  const { results, isLoading, requestError, handleSearch, pageCount } =
+    useCharacters();
 
   return (
     <main className="main">
@@ -18,6 +19,7 @@ export const Main = () => {
           characters={results}
           isLoading={isLoading}
           error={requestError}
+          pageCount={pageCount}
         />
       </ErrorBoundary>
     </main>
