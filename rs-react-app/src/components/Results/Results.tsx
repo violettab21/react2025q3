@@ -2,6 +2,7 @@ import './results.css';
 import type { Character } from '../../types';
 import { CharacterCard } from '../CharacterCard/CharacterCard';
 import { Pagination } from '../Pagination/Pagination';
+import { Loader } from '../Loader/Loader';
 
 export const Results = ({
   characters,
@@ -25,12 +26,16 @@ export const Results = ({
   return (
     <div className="resultsContainer">
       {isLoading ? (
-        <span data-testid="loader" className="loader"></span>
+        <Loader />
       ) : (
         <>
-          {characters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
+          <div className="charactersList">
+            {' '}
+            {characters.map((character) => (
+              <CharacterCard key={character.id} character={character} />
+            ))}
+          </div>
+
           <Pagination pageCount={pageCount}></Pagination>
         </>
       )}

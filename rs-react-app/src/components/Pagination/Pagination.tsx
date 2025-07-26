@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 import './pagination.css';
 
 export const Pagination = ({ pageCount }: { pageCount: number }) => {

@@ -14,16 +14,17 @@ export const useCharacters = () => {
 
   useEffect(() => {
     const urlPage = searchParams.get('page');
-    if (!urlPage) {
-      setSearchParams(`?page=1`);
+    if (urlPage === null) {
+      setSearchParams('page=1');
+      console.log('here');
     }
-    const urlPageNew = searchParams.get('page');
+
     const storedSearchValue = getStoredSearchTerm();
 
     const urlForRequest =
       storedSearchValue.length > 0
         ? `${url}?page=1&name=${storedSearchValue}`
-        : `${url}?page=${urlPageNew}`;
+        : `${url}?page=${urlPage ? urlPage : 1}`;
     handleCharactersRequest(urlForRequest);
   }, [searchParams, setSearchParams]);
 

@@ -5,6 +5,7 @@ import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
 import { ErrorButton } from '../ErrorBoundary/ErrorButton';
 import { useCharacters } from './hooks/useCharacters';
+import { Outlet } from 'react-router';
 
 export const Main = () => {
   const { results, isLoading, requestError, handleSearch, pageCount } =
@@ -13,14 +14,19 @@ export const Main = () => {
   return (
     <main className="main">
       <ErrorBoundary fallback={GENERIC_ERROR}>
-        <Search handleSearch={handleSearch} />
-        <ErrorButton />
-        <Results
-          characters={results}
-          isLoading={isLoading}
-          error={requestError}
-          pageCount={pageCount}
-        />
+        <div className="left">
+          <Search handleSearch={handleSearch} />
+          <ErrorButton />
+          <Results
+            characters={results}
+            isLoading={isLoading}
+            error={requestError}
+            pageCount={pageCount}
+          />
+        </div>
+        <div className="right">
+          <Outlet />
+        </div>
       </ErrorBoundary>
     </main>
   );
