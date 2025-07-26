@@ -1,7 +1,7 @@
 .characterDetails {
   position: relative;
   width: 300px;
-  background-color: grey;
+  background-color: rgb(176, 179, 182);
 }
 
 .closeButton {

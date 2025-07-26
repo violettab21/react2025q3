@@ -3,6 +3,7 @@ import { MainPage } from './components/Main/MainPage';
 import { CharacterDetails } from './components/CharacterDetails/CharacterDetails';
 import { About } from './components/About/About';
 import { Layout } from './components/Layout/Layout';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 const router = createBrowserRouter(
   [
@@ -17,6 +18,10 @@ const router = createBrowserRouter(
         {
           path: '/about',
           element: <About />,
+        },
+        {
+          path: '/*',
+          element: <NotFoundPage />,
         },
       ],
     },
