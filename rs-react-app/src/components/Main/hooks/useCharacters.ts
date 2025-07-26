@@ -23,7 +23,7 @@ export const useCharacters = () => {
 
     const urlForRequest =
       storedSearchValue.length > 0
-        ? `${url}?page=1&name=${storedSearchValue}`
+        ? `${url}?page=${urlPage ? urlPage : 1}&name=${storedSearchValue}`
         : `${url}?page=${urlPage ? urlPage : 1}`;
     handleCharactersRequest(urlForRequest);
   }, [searchParams, setSearchParams]);

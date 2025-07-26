@@ -7,12 +7,12 @@ import { ErrorButton } from '../ErrorBoundary/ErrorButton';
 import { useCharacters } from './hooks/useCharacters';
 import { Outlet } from 'react-router';
 
-export const Main = () => {
+export const MainPage = () => {
   const { results, isLoading, requestError, handleSearch, pageCount } =
     useCharacters();
 
   return (
-    <main className="main">
+    <div className="mainPage">
       <ErrorBoundary fallback={GENERIC_ERROR}>
         <div className="left">
           <Search handleSearch={handleSearch} />
@@ -28,6 +28,6 @@ export const Main = () => {
           <Outlet />
         </div>
       </ErrorBoundary>
-    </main>
+    </div>
   );
 };

@@ -1,4 +1,15 @@
 .characterDetails {
+  position: relative;
   width: 300px;
   background-color: grey;
+}
+
+.closeButton {
+  position: absolute;
+  right: 0;
+}
+
+.characterImage {
+  width: 80%;
+  max-width: 300px;
 }

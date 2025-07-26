@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Main } from './Main';
+import { MainPage } from './MainPage';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import {
@@ -29,7 +29,7 @@ describe('Main component tests', () => {
   });
 
   it('Check that API call is made to all records when no saved SearchTerm', async () => {
-    render(<Main />);
+    render(<MainPage />);
 
     await waitFor(() => {
       expect(fetch).toBeCalledWith(url);
@@ -41,7 +41,7 @@ describe('Main component tests', () => {
 
     localStorage.setItem(LOCAL_STORAGE_KEY, searchTerm);
 
-    render(<Main />);
+    render(<MainPage />);
 
     await waitFor(() => {
       expect(fetch).toBeCalledWith(`${url}?name=${searchTerm}`);
@@ -49,7 +49,7 @@ describe('Main component tests', () => {
   });
 
   it('Check that data received from API in Results', async () => {
-    render(<Main />);
+    render(<MainPage />);
 
     await waitFor(() => {
       expect(screen.getAllByTestId('card').length).toBe(
@@ -64,7 +64,7 @@ describe('Main component tests', () => {
   it('Check Error message when request returned with 404 error', async () => {
     mockFetch(mockedResponseFailNotFound);
 
-    render(<Main />);
+    render(<MainPage />);
 
     await waitFor(() => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
@@ -76,7 +76,7 @@ describe('Main component tests', () => {
   it('Check Error message when request returned with 500 error', async () => {
     mockFetch(mockedResponseFailServerError);
 
-    render(<Main />);
+    render(<MainPage />);
 
     await waitFor(() => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
@@ -86,7 +86,7 @@ describe('Main component tests', () => {
   });
 
   it('Check that fallback UI  appeared on clicking Error', async () => {
-    render(<Main />);
+    render(<MainPage />);
 
     const errorButton = screen.getByRole('button', { name: 'Emulate Error' });
 

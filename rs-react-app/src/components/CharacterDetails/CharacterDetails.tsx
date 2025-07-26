@@ -60,6 +60,7 @@ export const CharacterDetails = () => {
       ) : (
         <>
           <button
+            className="closeButton"
             onClick={() => {
               navigate(`/?page=${searchParams.get('page')}`);
             }}

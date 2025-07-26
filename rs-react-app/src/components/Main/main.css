@@ -1,13 +1,7 @@
-.main {
+.mainPage {
   position: relative;
-  width: 60%;
 
-  padding: 3rem 1rem;
   display: flex;
   justify-content: flex-start;
   border-radius: 10px;
-}
-
-.left {
-  max-height: 100vh;
 }
