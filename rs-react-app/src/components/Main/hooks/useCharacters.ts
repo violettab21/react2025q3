@@ -10,23 +10,22 @@ export const useCharacters = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [requestError, setRequestError] = useState<string>('');
   const [pageCount, setPageCount] = useState<number>(1);
-  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(() => {
+    const page = searchParams.get('page');
+    return page ? Number(page) : 1;
+  });
 
   useEffect(() => {
-    const urlPage = searchParams.get('page');
-    if (urlPage === null) {
-      setSearchParams('page=1');
-      console.log('here');
-    }
-
     const storedSearchValue = getStoredSearchTerm();
 
     const urlForRequest =
       storedSearchValue.length > 0
-        ? `${url}?page=${urlPage ? urlPage : 1}&name=${storedSearchValue}`
-        : `${url}?page=${urlPage ? urlPage : 1}`;
+        ? `${url}?page=${currentPage}&name=${storedSearchValue}`
+        : `${url}?page=${currentPage}`;
     handleCharactersRequest(urlForRequest);
-  }, [searchParams, setSearchParams]);
+  }, [currentPage]);
 
   const handleCharactersRequest = (endpoint: string) => {
     getCharacters(endpoint)
@@ -38,7 +37,6 @@ export const useCharacters = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error);
         if (error.message === '404') {
           setRequestError(NOT_FOUND_MESSAGE);
           setResults([]);
@@ -60,5 +58,7 @@ export const useCharacters = () => {
     requestError,
     handleSearch,
     pageCount,
+    currentPage,
+    setCurrentPage,
   };
 };

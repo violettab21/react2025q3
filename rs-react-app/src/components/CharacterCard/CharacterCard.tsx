@@ -8,7 +8,9 @@ export const CharacterCard = ({ character }: { character: Character }) => {
   return (
     <button
       onClick={() => {
-        navigate(`details/${character.id}?page=${searchParams.get('page')}`);
+        navigate(
+          `details/${character.id}?page=${searchParams.get('page') || 1}`
+        );
       }}
       data-testid="card"
       className="cardContainer"

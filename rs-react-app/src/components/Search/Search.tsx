@@ -1,15 +1,16 @@
-import { useState } from 'react';
 import './search.css';
-import { getStoredSearchTerm, saveToLocalStorage } from '../../helpers';
+import { useSearch } from './hooks/useSearch';
 
 export const Search = ({
   handleSearch,
 }: {
   handleSearch: (searchTerm: string) => Promise<void>;
 }) => {
-  const [currentSearchValue, setCurrentSearchValue] = useState(
-    getStoredSearchTerm()
-  );
+  const {
+    currentSearchValue,
+    searchCharactersChangeHandler,
+    searchCharactersHandler,
+  } = useSearch(handleSearch);
 
   return (
     <div className="searchContainer">
@@ -18,18 +19,9 @@ export const Search = ({
         className="searchInput"
         placeholder="Search"
         value={currentSearchValue}
-        onChange={(e) => {
-          setCurrentSearchValue(e.target.value);
-        }}
+        onChange={searchCharactersChangeHandler}
       ></input>
-      <button
-        className="searchButton"
-        onClick={() => {
-          const search = currentSearchValue.trim();
-          void handleSearch(search);
-          saveToLocalStorage(search);
-        }}
-      >
+      <button className="searchButton" onClick={searchCharactersHandler}>
         Search
       </button>
     </div>

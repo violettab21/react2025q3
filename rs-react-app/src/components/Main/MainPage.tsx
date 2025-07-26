@@ -8,8 +8,15 @@ import { useCharacters } from './hooks/useCharacters';
 import { Outlet } from 'react-router';
 
 export const MainPage = () => {
-  const { results, isLoading, requestError, handleSearch, pageCount } =
-    useCharacters();
+  const {
+    results,
+    isLoading,
+    requestError,
+    handleSearch,
+    pageCount,
+    currentPage,
+    setCurrentPage,
+  } = useCharacters();
 
   return (
     <div className="mainPage">
@@ -17,11 +24,14 @@ export const MainPage = () => {
         <div className="left">
           <Search handleSearch={handleSearch} />
           <ErrorButton />
+
           <Results
             characters={results}
             isLoading={isLoading}
             error={requestError}
             pageCount={pageCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
         </div>
         <div className="right">
