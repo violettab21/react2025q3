@@ -33,6 +33,7 @@ export const CharacterDetails = () => {
                 <p>Gender: {character.gender}</p>
                 <p>Species: {character.species}</p>
                 <p>Location: {character.location.name}</p>
+                <p>Origin: {character.origin.name}</p>
                 <p>Status: {character.status}</p>
               </div>
             </>

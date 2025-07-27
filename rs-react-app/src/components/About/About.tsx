@@ -2,7 +2,7 @@ import './about.css';
 
 export const About = () => {
   return (
-    <div className="aboutContainer">
+    <div data-testid="about" className="aboutContainer">
       <p>Author: Violetta Batsura</p>
       <p>
         This is application that was developed in scope of React Course to

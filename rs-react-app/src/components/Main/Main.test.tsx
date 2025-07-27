@@ -16,6 +16,7 @@ import {
   mockedResponseSuccess,
   mockFetch,
 } from '../../__tests__/mocks';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Main component tests', () => {
   beforeAll(() => {
@@ -29,10 +30,14 @@ describe('Main component tests', () => {
   });
 
   it('Check that API call is made to all records when no saved SearchTerm', async () => {
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
-      expect(fetch).toBeCalledWith(url);
+      expect(fetch).toBeCalledWith(`${url}/?page=1`);
     });
   });
 
@@ -41,15 +46,23 @@ describe('Main component tests', () => {
 
     localStorage.setItem(LOCAL_STORAGE_KEY, searchTerm);
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
-      expect(fetch).toBeCalledWith(`${url}?name=${searchTerm}`);
+      expect(fetch).toBeCalledWith(`${url}/?page=1&name=${searchTerm}`);
     });
   });
 
   it('Check that data received from API in Results', async () => {
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getAllByTestId('card').length).toBe(
@@ -64,7 +77,11 @@ describe('Main component tests', () => {
   it('Check Error message when request returned with 404 error', async () => {
     mockFetch(mockedResponseFailNotFound);
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
@@ -76,7 +93,11 @@ describe('Main component tests', () => {
   it('Check Error message when request returned with 500 error', async () => {
     mockFetch(mockedResponseFailServerError);
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
@@ -86,7 +107,11 @@ describe('Main component tests', () => {
   });
 
   it('Check that fallback UI  appeared on clicking Error', async () => {
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     const errorButton = screen.getByRole('button', { name: 'Emulate Error' });
 

@@ -1,26 +1,24 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { getCharacter } from '../../../api/characters';
 import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../../constants';
 import type { Character } from '../../../types';
-import { useCharacters } from '../../Main/hooks/useCharacters';
 
 export const useCharacterDetails = () => {
-  const parameters = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [character, setCharacter] = useState<Character | null>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [requestError, setRequestError] = useState<string>('');
-  const { currentPage } = useCharacters();
+  const [searchParams] = useSearchParams();
 
   const closeDetails = () => {
-    navigate(`/?page=${currentPage}`);
+    navigate(`/?page=${searchParams.get('page') || 1}`);
   };
 
   useEffect(() => {
-    const characterId = parameters.id;
-    if (characterId) {
-      getCharacter(characterId)
+    if (id) {
+      getCharacter(id)
         .then((response) => {
           setIsLoading(false);
           setCharacter(response);
@@ -37,7 +35,7 @@ export const useCharacterDetails = () => {
           }
         });
     }
-  }, [parameters.id]);
+  }, [id]);
 
   return { character, isLoading, requestError, closeDetails };
 };

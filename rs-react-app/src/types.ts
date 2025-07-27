@@ -8,6 +8,9 @@ export interface Character {
   location: {
     name: string;
   };
+  origin: {
+    name: string;
+  };
 }
 
 export interface CharactersResponse {

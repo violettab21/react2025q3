@@ -5,7 +5,7 @@ import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
 import { ErrorButton } from '../ErrorBoundary/ErrorButton';
 import { useCharacters } from './hooks/useCharacters';
-import { Outlet } from 'react-router';
+import { Outlet } from 'react-router-dom';
 
 export const MainPage = () => {
   const {
@@ -24,7 +24,6 @@ export const MainPage = () => {
         <div className="left">
           <Search handleSearch={handleSearch} />
           <ErrorButton />
-
           <Results
             characters={results}
             isLoading={isLoading}

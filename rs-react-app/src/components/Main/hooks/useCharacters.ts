@@ -22,8 +22,8 @@ export const useCharacters = () => {
 
     const urlForRequest =
       storedSearchValue.length > 0
-        ? `${url}?page=${currentPage}&name=${storedSearchValue}`
-        : `${url}?page=${currentPage}`;
+        ? `${url}/?page=${currentPage}&name=${storedSearchValue}`
+        : `${url}/?page=${currentPage}`;
     handleCharactersRequest(urlForRequest);
   }, [currentPage]);
 
