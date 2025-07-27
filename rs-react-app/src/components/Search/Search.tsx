@@ -7,7 +7,7 @@ export const Search = ({
   handleSearch: (searchTerm: string) => Promise<void>;
 }) => {
   const {
-    currentSearchValue,
+    searchValue,
     searchCharactersChangeHandler,
     searchCharactersHandler,
   } = useSearch(handleSearch);
@@ -18,7 +18,7 @@ export const Search = ({
       <input
         className="searchInput"
         placeholder="Search"
-        value={currentSearchValue}
+        value={searchValue}
         onChange={searchCharactersChangeHandler}
       ></input>
       <button className="searchButton" onClick={searchCharactersHandler}>

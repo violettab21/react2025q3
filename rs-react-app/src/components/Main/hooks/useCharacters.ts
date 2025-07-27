@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 import type { Character } from '../../../types';
 import { getCharacters } from '../../../api/characters';
-import { getStoredSearchTerm } from '../../../helpers';
-import { GENERIC_ERROR, NOT_FOUND_MESSAGE, url } from '../../../constants';
+import {
+  GENERIC_ERROR,
+  LOCAL_STORAGE_KEY,
+  NOT_FOUND_MESSAGE,
+  url,
+} from '../../../constants';
 import { useSearchParams } from 'react-router-dom';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 export const useCharacters = () => {
   const [results, setResults] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [requestError, setRequestError] = useState<string>('');
   const [pageCount, setPageCount] = useState<number>(1);
-
+  const { savedValue } = useLocalStorage(LOCAL_STORAGE_KEY);
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(() => {
     const page = searchParams.get('page');
@@ -18,11 +23,9 @@ export const useCharacters = () => {
   });
 
   useEffect(() => {
-    const storedSearchValue = getStoredSearchTerm();
-
     const urlForRequest =
-      storedSearchValue.length > 0
-        ? `${url}/?page=${currentPage}&name=${storedSearchValue}`
+      savedValue.length > 0
+        ? `${url}/?page=${currentPage}&name=${savedValue}`
         : `${url}/?page=${currentPage}`;
     handleCharactersRequest(urlForRequest);
   }, [currentPage]);
