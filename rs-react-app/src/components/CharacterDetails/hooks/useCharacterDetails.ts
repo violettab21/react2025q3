@@ -20,8 +20,8 @@ export const useCharacterDetails = () => {
     if (id) {
       getCharacter(id)
         .then((response) => {
-          setIsLoading(false);
           setCharacter(response);
+          setIsLoading(false);
           setRequestError('');
         })
         .catch((error) => {

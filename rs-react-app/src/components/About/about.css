@@ -1,3 +1,5 @@
 .aboutContainer {
-  background-color: rgb(118, 183, 226);
+  background-color: rgb(215, 233, 243);
+  padding: 2rem;
+  border-radius: 6px;
 }

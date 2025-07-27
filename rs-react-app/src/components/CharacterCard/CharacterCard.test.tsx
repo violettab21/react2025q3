@@ -26,16 +26,4 @@ describe('CharacterCard component tests', () => {
     const name = screen.getByText(`Name: ${character.name}`);
     expect(name).toBeInTheDocument();
   });
-
-  /*it('Check that CharacterCard component shows correct character image', () => {
-    render(<CharacterCard character={character} />);
-    const imageElement = screen.getByAltText('character image');
-    let imageSrc = '';
-    if (imageElement instanceof HTMLImageElement) {
-      imageSrc = imageElement.src;
-    }
-
-    expect(imageElement).toBeInTheDocument();
-    expect(imageSrc).toBe(character.image);
-  });*/
 });

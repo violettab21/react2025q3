@@ -6,6 +6,7 @@
 
 .button {
   padding: 0.2rem;
+  cursor: pointer;
 }
 
 .active {

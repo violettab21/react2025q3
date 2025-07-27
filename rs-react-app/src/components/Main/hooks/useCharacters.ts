@@ -15,20 +15,22 @@ export const useCharacters = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [requestError, setRequestError] = useState<string>('');
   const [pageCount, setPageCount] = useState<number>(1);
-  const { savedValue } = useLocalStorage(LOCAL_STORAGE_KEY);
-  const [searchParams] = useSearchParams();
+  const { savedValue, setSavedValue } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(() => {
     const page = searchParams.get('page');
     return page ? Number(page) : 1;
   });
 
   useEffect(() => {
+    setSearchParams(`page=${currentPage}`);
+
     const urlForRequest =
       savedValue.length > 0
         ? `${url}/?page=${currentPage}&name=${savedValue}`
         : `${url}/?page=${currentPage}`;
     handleCharactersRequest(urlForRequest);
-  }, [currentPage]);
+  }, [currentPage, savedValue, setSearchParams]);
 
   const handleCharactersRequest = (endpoint: string) => {
     getCharacters(endpoint)
@@ -51,6 +53,8 @@ export const useCharacters = () => {
 
   const handleSearch = async (searchTerm: string) => {
     const urlForRequest = `${url}?page=1&name=${searchTerm}`;
+    setCurrentPage(1);
+    setSavedValue(searchTerm);
     setIsLoading(true);
     handleCharactersRequest(urlForRequest);
   };

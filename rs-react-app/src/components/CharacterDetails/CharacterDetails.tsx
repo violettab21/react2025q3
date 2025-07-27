@@ -28,7 +28,7 @@ export const CharacterDetails = () => {
                   alt="character image"
                 ></img>
               </div>
-              <div className="characterInfo">
+              <div className="characterDetailsInfo">
                 <p>Name: {character.name}</p>
                 <p>Gender: {character.gender}</p>
                 <p>Species: {character.species}</p>

@@ -1,5 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
+const maxVisiblePages = 5;
+
 export const usePagination = (
   pageCount: number,
   currentPage: number,
@@ -9,17 +11,19 @@ export const usePagination = (
 
   const getPageNumberArray = (): number[] => {
     const array = [];
-    if (pageCount < 5) {
+    if (pageCount < maxVisiblePages) {
       for (let i = 1; i <= pageCount; i++) {
         array.push(i);
       }
     } else {
-      if (pageCount - currentPage >= 5) {
-        for (let i = 1; i <= 5; i++) {
-          array.push((Math.ceil(currentPage / 5) - 1) * 5 + i);
+      if (pageCount - currentPage >= maxVisiblePages) {
+        for (let i = 1; i <= maxVisiblePages; i++) {
+          array.push(
+            (Math.ceil(currentPage / maxVisiblePages) - 1) * maxVisiblePages + i
+          );
         }
       } else {
-        for (let i = pageCount - 4; i <= pageCount; i++) {
+        for (let i = pageCount - (maxVisiblePages - 1); i <= pageCount; i++) {
           array.push(i);
         }
       }
@@ -42,7 +46,6 @@ export const usePagination = (
 
   const pageButtonHandler = (page: number) => {
     setSearchParams(`?page=${page}`);
-    console.log(`pagination ${page}`);
     setCurrentPage(page);
   };
 

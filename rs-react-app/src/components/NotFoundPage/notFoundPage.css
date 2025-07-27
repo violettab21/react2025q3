@@ -1,5 +1,5 @@
 .notFoundPageContainer {
-  background-color: #00bcd4;
+  background-color: rgb(215, 233, 243);
   width: 200px;
   padding: 2rem;
   border-radius: 4px;
@@ -14,7 +14,7 @@
   padding: 0.5rem;
   border: none;
   border-radius: 6px;
-  background-color: rgb(215, 233, 243);
+  background-color: rgb(142, 201, 235);
   cursor: pointer;
   text-align: center;
 }

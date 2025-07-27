@@ -4,4 +4,6 @@
   display: flex;
   justify-content: flex-start;
   border-radius: 10px;
+
+  gap: 1rem;
 }

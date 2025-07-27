@@ -1,15 +1,29 @@
 .characterDetails {
   position: relative;
-  width: 300px;
+  width: 400px;
   background-color: rgb(176, 179, 182);
+  padding: 3rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
 .closeButton {
   position: absolute;
   right: 0;
+  top: 0;
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .characterImage {
-  width: 80%;
+  width: 100%;
   max-width: 300px;
+}
+
+.characterDetailsInfo {
+  padding-top: 1rem;
+  font-size: 1.2rem;
 }

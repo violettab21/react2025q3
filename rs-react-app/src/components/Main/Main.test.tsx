@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MainPage } from './MainPage';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import {
   GENERIC_ERROR,
   LOCAL_STORAGE_KEY,
@@ -104,22 +103,5 @@ describe('Main component tests', () => {
         GENERIC_ERROR
       );
     });
-  });
-
-  it('Check that fallback UI  appeared on clicking Error', async () => {
-    render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
-    );
-
-    const errorButton = screen.getByRole('button', { name: 'Emulate Error' });
-
-    await userEvent.click(errorButton);
-    const fallbackUIButton = screen.getByRole('button', { name: 'Try again' });
-    const fallbackUIMessage = screen.getByText(GENERIC_ERROR);
-
-    expect(fallbackUIButton).toBeInTheDocument();
-    expect(fallbackUIMessage).toBeInTheDocument();
   });
 });

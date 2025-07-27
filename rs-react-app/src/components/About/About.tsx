@@ -10,7 +10,13 @@ export const About = () => {
       </p>
       <p>
         Course:{' '}
-        <a href="https://rs.school/courses/reactjs">RS School React course</a>
+        <a
+          href="https://rs.school/courses/reactjs"
+          target="_blank"
+          rel="noreferrer"
+        >
+          RS School React course
+        </a>
       </p>
     </div>
   );

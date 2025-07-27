@@ -20,8 +20,8 @@ export const useSearch = (
   const searchCharactersHandler = () => {
     const search = searchValue.trim();
     void handleSearch(search);
-    setSearchValue(searchValue);
-    saveValueToLocalStorage(searchValue);
+    setSearchValue(search);
+    saveValueToLocalStorage(search);
   };
 
   return {
