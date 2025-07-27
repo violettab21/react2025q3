@@ -1,14 +1,10 @@
 .cardContainer {
   display: flex;
-  justify-self: start;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
   width: 400px;
   background-color: rgb(215, 233, 243);
   padding: 2rem;
   border-radius: 6px;
-}
-
-.characterImage {
-  width: 100px;
 }

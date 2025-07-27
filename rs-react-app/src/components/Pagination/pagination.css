@@ -1,0 +1,14 @@
+.paginationContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.button {
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.active {
+  background-color: rgb(215, 233, 243);
+}

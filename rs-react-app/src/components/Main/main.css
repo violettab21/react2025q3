@@ -1,6 +1,9 @@
-.main {
-  width: 50%;
-  padding: 3rem 1rem;
+.mainPage {
+  position: relative;
 
+  display: flex;
+  justify-content: flex-start;
   border-radius: 10px;
+
+  gap: 1rem;
 }

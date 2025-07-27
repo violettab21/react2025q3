@@ -1,30 +1,44 @@
-import { Component } from 'react';
 import './results.css';
-import type { Character } from '../../types';
 import { CharacterCard } from '../CharacterCard/CharacterCard';
+import { Pagination } from '../Pagination/Pagination';
+import { Loader } from '../Loader/Loader';
+import type { ResultsProps } from './types';
 
-export class Results extends Component<{
-  characters: Character[];
-  isLoading: boolean;
-  error: string;
-}> {
-  render() {
-    if (this.props.error)
-      return (
-        <p data-testid="errorMessage" className="errorMessage">
-          {this.props.error}
-        </p>
-      );
+export const Results = ({
+  characters,
+  isLoading,
+  error,
+  pageCount,
+  currentPage,
+  setCurrentPage,
+}: ResultsProps) => {
+  if (error) {
     return (
-      <div className="resultsContainer">
-        {this.props.isLoading ? (
-          <span data-testid="loader" className="loader"></span>
-        ) : (
-          this.props.characters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))
-        )}
-      </div>
+      <p data-testid="errorMessage" className="errorMessage">
+        {error}
+      </p>
     );
   }
-}
+
+  return (
+    <div className="resultsContainer">
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="charactersList">
+            {characters.map((character) => (
+              <CharacterCard key={character.id} character={character} />
+            ))}
+          </div>
+
+          <Pagination
+            pageCount={pageCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          ></Pagination>
+        </>
+      )}
+    </div>
+  );
+};

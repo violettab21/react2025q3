@@ -1,8 +1,7 @@
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Main } from './Main';
+import { MainPage } from './MainPage';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import {
   GENERIC_ERROR,
   LOCAL_STORAGE_KEY,
@@ -16,6 +15,7 @@ import {
   mockedResponseSuccess,
   mockFetch,
 } from '../../__tests__/mocks';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Main component tests', () => {
   beforeAll(() => {
@@ -29,10 +29,14 @@ describe('Main component tests', () => {
   });
 
   it('Check that API call is made to all records when no saved SearchTerm', async () => {
-    render(<Main />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
-      expect(fetch).toBeCalledWith(url);
+      expect(fetch).toBeCalledWith(`${url}/?page=1`);
     });
   });
 
@@ -41,15 +45,23 @@ describe('Main component tests', () => {
 
     localStorage.setItem(LOCAL_STORAGE_KEY, searchTerm);
 
-    render(<Main />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
-      expect(fetch).toBeCalledWith(`${url}?name=${searchTerm}`);
+      expect(fetch).toBeCalledWith(`${url}/?page=1&name=${searchTerm}`);
     });
   });
 
   it('Check that data received from API in Results', async () => {
-    render(<Main />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getAllByTestId('card').length).toBe(
@@ -64,7 +76,11 @@ describe('Main component tests', () => {
   it('Check Error message when request returned with 404 error', async () => {
     mockFetch(mockedResponseFailNotFound);
 
-    render(<Main />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
@@ -76,25 +92,16 @@ describe('Main component tests', () => {
   it('Check Error message when request returned with 500 error', async () => {
     mockFetch(mockedResponseFailServerError);
 
-    render(<Main />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
         GENERIC_ERROR
       );
     });
-  });
-
-  it('Check that fallback UI  appeared on clicking Error', async () => {
-    render(<Main />);
-
-    const errorButton = screen.getByRole('button', { name: 'Emulate Error' });
-
-    await userEvent.click(errorButton);
-    const fallbackUIButton = screen.getByRole('button', { name: 'Try again' });
-    const fallbackUIMessage = screen.getByText(GENERIC_ERROR);
-
-    expect(fallbackUIButton).toBeInTheDocument();
-    expect(fallbackUIMessage).toBeInTheDocument();
   });
 });
