@@ -3,6 +3,7 @@ import { CharacterCard } from '../CharacterCard/CharacterCard';
 import { Pagination } from '../Pagination/Pagination';
 import { Loader } from '../Loader/Loader';
 import type { ResultsProps } from './types';
+import { resultSelected, useAppDispatch } from '../../store/store';
 
 export const Results = ({
   characters,
@@ -12,6 +13,7 @@ export const Results = ({
   currentPage,
   setCurrentPage,
 }: ResultsProps) => {
+  const dispatch = useAppDispatch();
   if (error) {
     return (
       <p data-testid="errorMessage" className="errorMessage">
@@ -28,7 +30,15 @@ export const Results = ({
         <>
           <div className="charactersList">
             {characters.map((character) => (
-              <CharacterCard key={character.id} character={character} />
+              <div key={character.id} className="characterRow">
+                <input
+                  type="checkbox"
+                  onClick={() => {
+                    dispatch(resultSelected(character));
+                  }}
+                ></input>
+                <CharacterCard key={character.id} character={character} />
+              </div>
             ))}
           </div>
 
