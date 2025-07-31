@@ -15,6 +15,10 @@ const resultsSlice = createSlice({
     resultSelected(state, action: PayloadAction<Character>) {
       state.push(action.payload);
     },
+    resultUnselected(state, action: PayloadAction<Character>) {
+      const index = state.findIndex((el) => el.id === action.payload.id);
+      state.splice(index, 1);
+    },
   },
 });
 
@@ -26,5 +30,6 @@ export type AppStore = typeof store;
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const { resultSelected } = resultsSlice.actions;
+export const { resultUnselected } = resultsSlice.actions;
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
