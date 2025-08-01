@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   resultSelected,
   resultUnselected,
@@ -13,23 +12,16 @@ export const ResultRow = ({ character }: { character: Character }) => {
   const selectedCharacter = useAppSelector((state) =>
     state.selectedCards.find((el) => el.id === character.id)
   );
-  const [checkboxState, setCheckboxState] = useState(
-    selectedCharacter ? true : false
-  );
   return (
     <div key={character.id} className="characterRow">
       <input
         type="checkbox"
-        checked={checkboxState}
+        checked={selectedCharacter ? true : false}
         onChange={() => {
-          if (!checkboxState) {
+          if (!selectedCharacter) {
             dispatch(resultSelected(character));
-            setCheckboxState(true);
-            console.log(checkboxState);
           } else {
             dispatch(resultUnselected(character));
-            setCheckboxState(false);
-            console.log(checkboxState);
           }
         }}
       ></input>

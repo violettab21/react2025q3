@@ -5,6 +5,7 @@ import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
 import { useCharacters } from './hooks/useCharacters';
 import { Outlet } from 'react-router-dom';
+import { Flyout } from '../Flyout/Flyout';
 
 export const MainPage = () => {
   const {
@@ -30,7 +31,9 @@ export const MainPage = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
+          <Flyout />
         </div>
+
         <div className="right">
           <Outlet />
         </div>
