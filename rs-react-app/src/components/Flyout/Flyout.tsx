@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../App';
 import {
   allResultsUnselected,
   useAppDispatch,
@@ -9,6 +11,7 @@ import './flyout.css';
 export const Flyout = () => {
   const dispatch = useAppDispatch();
   const selectedCharacters = useAppSelector((state) => state.selectedCards);
+  const theme = useContext(ThemeContext);
 
   if (selectedCharacters.length === 0) {
     return null;
@@ -36,16 +39,21 @@ export const Flyout = () => {
   };
 
   return (
-    <div className="flyout">
+    <div className={`flyout flyout-${theme.theme}`}>
       <p>{selectedCharacters.length} items are selected</p>
       <button
+        className="unselect"
         onClick={() => {
           dispatch(allResultsUnselected());
         }}
       >
         Unselect all
       </button>
-      <a href={prepareFile()} download={`${selectedCharacters.length}_items`}>
+      <a
+        className="download"
+        href={prepareFile()}
+        download={`${selectedCharacters.length}_items`}
+      >
         Download
       </a>
     </div>

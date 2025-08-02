@@ -23,14 +23,17 @@ export const MainPage = () => {
       <ErrorBoundary fallback={GENERIC_ERROR}>
         <div className="left">
           <Search handleSearch={handleSearch} />
-          <Results
-            characters={results}
-            isLoading={isLoading}
-            error={requestError}
-            pageCount={pageCount}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          <div>
+            <Results
+              characters={results}
+              isLoading={isLoading}
+              error={requestError}
+              pageCount={pageCount}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+
           <Flyout />
         </div>
 
