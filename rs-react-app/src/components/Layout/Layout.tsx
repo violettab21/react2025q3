@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 import './layout.css';
 import darkTheme from '../../assets/dark-theme.svg';
 import lightTheme from '../../assets/light-theme.svg';
-import { ThemeContext } from '../../App';
+import { ThemeContext } from '../../context/Context';
 import { useContext } from 'react';
 
 export const Layout = () => {

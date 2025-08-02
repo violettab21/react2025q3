@@ -2,8 +2,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { Character } from '../../types';
 import './characterCard.css';
 import { useContext } from 'react';
-import { ThemeContext } from '../../App';
-
+import { ThemeContext } from '../../context/Context';
 export const CharacterCard = ({ character }: { character: Character }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
