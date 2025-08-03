@@ -16,6 +16,9 @@ import {
   mockFetch,
 } from '../../__tests__/mocks';
 import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import { createStore } from '../../store/store';
 
 describe('Main component tests', () => {
   beforeAll(() => {
@@ -29,10 +32,13 @@ describe('Main component tests', () => {
   });
 
   it('Check that API call is made to all records when no saved SearchTerm', async () => {
+    const store = createStore();
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -41,14 +47,17 @@ describe('Main component tests', () => {
   });
 
   it('Check that API call is made to endpoint for search when saved SearchTerm exists', async () => {
+    const store = createStore();
     const searchTerm = 'Rick';
 
     localStorage.setItem(LOCAL_STORAGE_KEY, searchTerm);
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -57,10 +66,13 @@ describe('Main component tests', () => {
   });
 
   it('Check that data received from API in Results', async () => {
+    const store = createStore();
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -74,12 +86,15 @@ describe('Main component tests', () => {
   });
 
   it('Check Error message when request returned with 404 error', async () => {
+    const store = createStore();
     mockFetch(mockedResponseFailNotFound);
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -90,12 +105,15 @@ describe('Main component tests', () => {
   });
 
   it('Check Error message when request returned with 500 error', async () => {
+    const store = createStore();
     mockFetch(mockedResponseFailServerError);
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {

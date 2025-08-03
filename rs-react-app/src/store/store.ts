@@ -25,13 +25,19 @@ const resultsSlice = createSlice({
   },
 });
 
-export const store = configureStore({
-  reducer: { selectedCards: resultsSlice.reducer },
-});
+export const createStore = () => {
+  return configureStore({
+    reducer: { selectedCards: resultsSlice.reducer },
+  });
+};
 
-export type AppStore = typeof store;
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export const store = createStore();
+
+export type AppStore = ReturnType<typeof createStore>;
+export type AppDispatch = AppStore['dispatch'];
+export type RootState = {
+  selectedCards: Character[];
+};
 export const { resultSelected } = resultsSlice.actions;
 export const { resultUnselected } = resultsSlice.actions;
 export const { allResultsUnselected } = resultsSlice.actions;

@@ -7,6 +7,8 @@ import { MainPage } from '../Main/MainPage';
 import { Layout } from '../Layout/Layout';
 import { mockedResponseSuccess, mockFetch } from '../../__tests__/mocks';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from '../../store/store';
 
 describe('NotFoundPage component tests', () => {
   beforeAll(() => {
@@ -16,10 +18,13 @@ describe('NotFoundPage component tests', () => {
     vi.clearAllMocks();
   });
   it('Check that NotFoundPage component renders correctly', () => {
+    const store = createStore();
     render(
-      <MemoryRouter>
-        <NotFoundPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <NotFoundPage />
+        </MemoryRouter>
+      </Provider>
     );
     const text = screen.getByText('Page is not found');
 
@@ -27,15 +32,18 @@ describe('NotFoundPage component tests', () => {
   });
 
   it('Check that NotFoundPage component renders correctly', async () => {
+    const store = createStore();
     render(
-      <MemoryRouter initialEntries={['/sdfsdf']}>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<MainPage />}></Route>
-            <Route path="/*" element={<NotFoundPage />}></Route>
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/sdfsdf']}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<MainPage />}></Route>
+              <Route path="/*" element={<NotFoundPage />}></Route>
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     const button = screen.getByRole('link', { name: 'Go to Home' });

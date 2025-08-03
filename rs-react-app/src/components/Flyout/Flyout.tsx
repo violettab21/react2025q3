@@ -5,8 +5,8 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../store/store';
-import type { Character } from '../../types';
 import './flyout.css';
+import { prepareFile } from './helpers';
 
 export const Flyout = () => {
   const dispatch = useAppDispatch();
@@ -17,29 +17,8 @@ export const Flyout = () => {
     return null;
   }
 
-  const transformObject = (character: Character) => {
-    return {
-      name: character.name,
-      gender: character.gender,
-      location: character.location.name,
-      origin: character.origin.name,
-    };
-  };
-
-  const prepareFile = () => {
-    const header = `name, gender, location, origin\n`;
-    const contentString = selectedCharacters
-      .map((el) => transformObject(el))
-      .map((element) => Object.values(element))
-      .join('\n');
-    const finalString = `${header}${contentString}`;
-    const file = new Blob([finalString], { type: 'text/csv' });
-    const url = URL.createObjectURL(file);
-    return url;
-  };
-
   return (
-    <div className={`flyout flyout-${theme.theme}`}>
+    <div data-testid="flyout-id" className={`flyout flyout-${theme.theme}`}>
       <p>{selectedCharacters.length} items are selected</p>
       <button
         className="unselect"
@@ -51,7 +30,7 @@ export const Flyout = () => {
       </button>
       <a
         className="download"
-        href={prepareFile()}
+        href={prepareFile(selectedCharacters)}
         download={`${selectedCharacters.length}_items`}
       >
         Download
