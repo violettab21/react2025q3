@@ -2,13 +2,16 @@ import './characterDetails.css';
 import { Loader } from '../Loader/Loader';
 import image from '../../assets/close.svg';
 import { useCharacterDetails } from './hooks/useCharacterDetails';
+import { ThemeContext } from '../../context/Context';
+import { useContext } from 'react';
 
 export const CharacterDetails = () => {
   const { character, isLoading, requestError, closeDetails } =
     useCharacterDetails();
+  const currentTheme = useContext(ThemeContext);
 
   return (
-    <div className="characterDetails">
+    <div className={`characterDetails characterDetails-${currentTheme.theme}`}>
       {requestError ? (
         <p className="errorMessage">{requestError}</p>
       ) : (

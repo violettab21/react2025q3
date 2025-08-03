@@ -1,8 +1,9 @@
 import './results.css';
-import { CharacterCard } from '../CharacterCard/CharacterCard';
 import { Pagination } from '../Pagination/Pagination';
 import { Loader } from '../Loader/Loader';
 import type { ResultsProps } from './types';
+
+import { ResultRow } from '../ResultRow/ResultRow';
 
 export const Results = ({
   characters,
@@ -28,7 +29,7 @@ export const Results = ({
         <>
           <div className="charactersList">
             {characters.map((character) => (
-              <CharacterCard key={character.id} character={character} />
+              <ResultRow key={character.id} character={character} />
             ))}
           </div>
 

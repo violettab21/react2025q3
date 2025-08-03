@@ -14,6 +14,7 @@ export const About = () => {
           href="https://rs.school/courses/reactjs"
           target="_blank"
           rel="noreferrer"
+          className="courseLink"
         >
           RS School React course
         </a>

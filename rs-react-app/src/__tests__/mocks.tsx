@@ -456,6 +456,22 @@ export const character: Character = {
   },
   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
 };
+
+export const character2: Character = {
+  id: 1,
+  name: 'Rick Sanchez',
+  status: 'Alive',
+  species: 'Human',
+  gender: 'Male',
+  origin: {
+    name: 'Earth (C-137)',
+  },
+  location: {
+    name: 'Citadel of Ricks',
+  },
+  image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+};
+
 export const mockedResponseSuccess = {
   ok: true,
   status: 200,

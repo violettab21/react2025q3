@@ -5,6 +5,7 @@ import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
 import { useCharacters } from './hooks/useCharacters';
 import { Outlet } from 'react-router-dom';
+import { Flyout } from '../Flyout/Flyout';
 
 export const MainPage = () => {
   const {
@@ -22,15 +23,20 @@ export const MainPage = () => {
       <ErrorBoundary fallback={GENERIC_ERROR}>
         <div className="left">
           <Search handleSearch={handleSearch} />
-          <Results
-            characters={results}
-            isLoading={isLoading}
-            error={requestError}
-            pageCount={pageCount}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          <div>
+            <Results
+              characters={results}
+              isLoading={isLoading}
+              error={requestError}
+              pageCount={pageCount}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+
+          <Flyout />
         </div>
+
         <div className="right">
           <Outlet />
         </div>

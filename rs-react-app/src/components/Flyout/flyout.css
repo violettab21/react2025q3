@@ -1,0 +1,32 @@
+.flyout {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  bottom: 0;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.download,
+.unselect {
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+  color: black;
+
+  background-color: white;
+  text-decoration: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.flyout-light {
+  background-color: #a9bfcc;
+}
+
+.flyout-dark {
+  background-color: #939ea5;
+}
