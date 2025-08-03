@@ -5,10 +5,13 @@
 }
 
 .button {
-  padding: 0.2rem;
+  padding: 0.5rem;
   cursor: pointer;
+  border: none;
+  font-weight: bold;
+  background-color: #f0fbff;
 }
 
 .active {
-  background-color: rgb(215, 233, 243);
+  background-color: rgb(142, 201, 235);
 }

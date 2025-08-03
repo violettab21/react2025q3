@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('ResultRow component tests', () => {
-  it('Check that ResultRow component show checkbox', () => {
+  it('Check that ResultRow component shows checkbox', () => {
     const store = createStore();
 
     render(
@@ -42,30 +42,6 @@ describe('ResultRow component tests', () => {
     await userEvent.click(checkbox);
     const state = store.getState();
     expect(state.selectedCards[0].id).toEqual(character.id);
-  });
-
-  it('Check that item is removed from state on removing checkbox', async () => {
-    const store = createStore();
-
-    store.dispatch(resultSelected(mockedCharactersList[0]));
-    store.dispatch(resultSelected(mockedCharactersList[1]));
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          {' '}
-          <ResultRow character={mockedCharactersList[0]} />
-        </MemoryRouter>
-      </Provider>
-    );
-
-    const checkbox = screen.getByRole('checkbox');
-    await userEvent.click(checkbox);
-    const state = store.getState();
-    const removedItem = state.selectedCards.some(
-      (el) => el.id === mockedCharactersList[0].id
-    );
-    expect(removedItem).toEqual(false);
   });
 
   it('Check that item is removed from state on removing checkbox', async () => {

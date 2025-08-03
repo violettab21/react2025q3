@@ -32,7 +32,7 @@ export const Layout = () => {
         <button className="theme" onClick={changeTheme}>
           <img
             className="themeIcon"
-            src={currentTheme.theme === 'light' ? darkTheme : lightTheme}
+            src={currentTheme.theme === 'light' ? lightTheme : darkTheme}
           ></img>
         </button>
       </nav>
