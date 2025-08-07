@@ -4,19 +4,20 @@ import { Loader } from '../Loader/Loader';
 import type { ResultsProps } from './types';
 
 import { ResultRow } from '../ResultRow/ResultRow';
+import { GENERIC_ERROR } from '../../constants';
 
 export const Results = ({
   characters,
   isLoading,
-  error,
+  isError,
   pageCount,
   currentPage,
   setCurrentPage,
 }: ResultsProps) => {
-  if (error) {
+  if (isError) {
     return (
       <p data-testid="errorMessage" className="errorMessage">
-        {error}
+        {GENERIC_ERROR}
       </p>
     );
   }

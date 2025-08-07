@@ -5,6 +5,8 @@ import {
 } from '@reduxjs/toolkit';
 import type { Character } from '../types';
 import { useDispatch, useSelector } from 'react-redux';
+import { rickAndMortyAPI } from './api';
+import { setupListeners } from '@reduxjs/toolkit/query/react';
 
 const initialState: Character[] = [];
 
@@ -27,7 +29,12 @@ const resultsSlice = createSlice({
 
 export const createStore = () => {
   return configureStore({
-    reducer: { selectedCards: resultsSlice.reducer },
+    reducer: {
+      selectedCards: resultsSlice.reducer,
+      [rickAndMortyAPI.reducerPath]: rickAndMortyAPI.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(rickAndMortyAPI.middleware),
   });
 };
 
@@ -43,3 +50,4 @@ export const { resultUnselected } = resultsSlice.actions;
 export const { allResultsUnselected } = resultsSlice.actions;
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
+setupListeners(store.dispatch);

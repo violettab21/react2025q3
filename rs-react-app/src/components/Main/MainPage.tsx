@@ -9,11 +9,16 @@ import { Flyout } from '../Flyout/Flyout';
 
 export const MainPage = () => {
   const {
-    results,
+    data: {
+      results,
+      info: { pages },
+    },
     isLoading,
-    requestError,
+    isFetching,
+
+    isError,
+    error,
     handleSearch,
-    pageCount,
     currentPage,
     setCurrentPage,
   } = useCharacters();
@@ -27,8 +32,10 @@ export const MainPage = () => {
             <Results
               characters={results}
               isLoading={isLoading}
-              error={requestError}
-              pageCount={pageCount}
+              isFetching={isFetching}
+              isError={isError}
+              error={error}
+              pageCount={pages}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
