@@ -9,6 +9,7 @@ import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../constants';
 export const Results = ({
   characters,
   isLoading,
+  isFetching,
   isError,
   error,
   pageCount,
@@ -33,7 +34,7 @@ export const Results = ({
 
   return (
     <div className="resultsContainer">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <Loader />
       ) : (
         <>

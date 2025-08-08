@@ -6,13 +6,12 @@ export const useCharacterDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { data, isLoading, isError, error, refetch } = useGetCharacterQuery(
-    Number(id)
-  );
+  const { data, isLoading, isFetching, isError, error, refetch } =
+    useGetCharacterQuery(Number(id));
 
   const closeDetails = () => {
     navigate(`/?page=${searchParams.get('page') || 1}`);
   };
 
-  return { data, isLoading, isError, error, refetch, closeDetails };
+  return { data, isLoading, isError, isFetching, error, refetch, closeDetails };
 };

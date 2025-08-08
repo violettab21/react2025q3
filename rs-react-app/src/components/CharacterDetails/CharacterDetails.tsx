@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../constants';
 
 export const CharacterDetails = () => {
-  const { data, isLoading, isError, error, refetch, closeDetails } =
+  const { data, isLoading, isFetching, isError, error, refetch, closeDetails } =
     useCharacterDetails();
   const currentTheme = useContext(ThemeContext);
 
@@ -28,7 +28,7 @@ export const CharacterDetails = () => {
             <img src={image}></img>
           </button>
 
-          {isLoading ? (
+          {isLoading || isFetching ? (
             <Loader />
           ) : data ? (
             <>
