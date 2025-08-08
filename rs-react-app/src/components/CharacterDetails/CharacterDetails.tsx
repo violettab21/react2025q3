@@ -4,16 +4,23 @@ import image from '../../assets/close.svg';
 import { useCharacterDetails } from './hooks/useCharacterDetails';
 import { ThemeContext } from '../../context/Context';
 import { useContext } from 'react';
+import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../constants';
 
 export const CharacterDetails = () => {
-  const { character, isLoading, requestError, closeDetails } =
+  const { data, isLoading, isError, error, closeDetails } =
     useCharacterDetails();
   const currentTheme = useContext(ThemeContext);
 
   return (
     <div className={`characterDetails characterDetails-${currentTheme.theme}`}>
-      {requestError ? (
-        <p className="errorMessage">{requestError}</p>
+      {isError ? (
+        error && 'status' in error ? (
+          <p className="errorMessage">
+            {error.status === 404 ? NOT_FOUND_MESSAGE : GENERIC_ERROR}
+          </p>
+        ) : (
+          GENERIC_ERROR
+        )
       ) : (
         <>
           <button className="closeButton" onClick={closeDetails}>
@@ -22,22 +29,22 @@ export const CharacterDetails = () => {
 
           {isLoading ? (
             <Loader />
-          ) : character ? (
+          ) : data ? (
             <>
               <div className="characterImageContainer">
                 <img
                   className="characterImage"
-                  src={character.image}
+                  src={data.image}
                   alt="character image"
                 ></img>
               </div>
               <div className="characterDetailsInfo">
-                <p>Name: {character.name}</p>
-                <p>Gender: {character.gender}</p>
-                <p>Species: {character.species}</p>
-                <p>Location: {character.location.name}</p>
-                <p>Origin: {character.origin.name}</p>
-                <p>Status: {character.status}</p>
+                <p>Name: {data.name}</p>
+                <p>Gender: {data.gender}</p>
+                <p>Species: {data.species}</p>
+                <p>Location: {data.location.name}</p>
+                <p>Origin: {data.origin.name}</p>
+                <p>Status: {data.status}</p>
               </div>
             </>
           ) : null}
