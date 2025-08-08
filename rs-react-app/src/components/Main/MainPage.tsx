@@ -6,6 +6,7 @@ import { Results } from '../Results/Results';
 import { useCharacters } from './hooks/useCharacters';
 import { Outlet } from 'react-router-dom';
 import { Flyout } from '../Flyout/Flyout';
+import refreshIcon from '../../assets/refresh.svg';
 
 export const MainPage = () => {
   const {
@@ -21,6 +22,7 @@ export const MainPage = () => {
     handleSearch,
     currentPage,
     setCurrentPage,
+    refetch,
   } = useCharacters();
 
   return (
@@ -28,6 +30,10 @@ export const MainPage = () => {
       <ErrorBoundary fallback={GENERIC_ERROR}>
         <div className="left">
           <Search handleSearch={handleSearch} />
+          <button className="refreshButton" onClick={refetch}>
+            <img className="refresh" src={refreshIcon} alt="refresh"></img>
+          </button>
+
           <div>
             <Results
               characters={results}

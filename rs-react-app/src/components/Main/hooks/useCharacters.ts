@@ -24,6 +24,7 @@ export const useCharacters = () => {
     isFetching,
     isError,
     error,
+    refetch,
   } = useGetCharactersQuery({
     page: currentPage,
     searchTerm: savedValue,
@@ -47,5 +48,6 @@ export const useCharacters = () => {
     handleSearch,
     currentPage,
     setCurrentPage,
+    refetch,
   };
 };
