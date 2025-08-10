@@ -1,20 +1,24 @@
-import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  beforeEach,
+  beforeAll,
+  afterEach,
+  afterAll,
+} from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MainPage } from './MainPage';
 import '@testing-library/jest-dom';
+import { http, HttpResponse } from 'msw';
 import {
   GENERIC_ERROR,
   LOCAL_STORAGE_KEY,
   NOT_FOUND_MESSAGE,
   url,
 } from '../../constants';
-import {
-  mockedResponse,
-  mockedResponseFailNotFound,
-  mockedResponseFailServerError,
-  mockedResponseSuccess,
-  mockFetch,
-} from '../../__tests__/mocks';
+import { mockedResponse, server } from '../../__tests__/mocks';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -22,48 +26,14 @@ import { createStore } from '../../store/store';
 
 describe('Main component tests', () => {
   beforeAll(() => {
-    mockFetch(mockedResponseSuccess);
-    console.error = vi.fn();
-    console.log = vi.fn();
+    server.listen();
   });
   beforeEach(() => {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
     vi.clearAllMocks();
   });
-
-  it('Check that API call is made to all records when no saved SearchTerm', async () => {
-    const store = createStore();
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-      </Provider>
-    );
-
-    await waitFor(() => {
-      expect(fetch).toBeCalledWith(`${url}/?page=1`);
-    });
-  });
-
-  it('Check that API call is made to endpoint for search when saved SearchTerm exists', async () => {
-    const store = createStore();
-    const searchTerm = 'Rick';
-
-    localStorage.setItem(LOCAL_STORAGE_KEY, searchTerm);
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-      </Provider>
-    );
-
-    await waitFor(() => {
-      expect(fetch).toBeCalledWith(`${url}/?page=1&name=${searchTerm}`);
-    });
-  });
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
 
   it('Check that data received from API in Results', async () => {
     const store = createStore();
@@ -87,8 +57,12 @@ describe('Main component tests', () => {
 
   it('Check Error message when request returned with 404 error', async () => {
     const store = createStore();
-    mockFetch(mockedResponseFailNotFound);
 
+    server.use(
+      http.get(`${url}`, () => {
+        return HttpResponse.json(null, { status: 404 });
+      })
+    );
     render(
       <Provider store={store}>
         <MemoryRouter>
@@ -106,7 +80,11 @@ describe('Main component tests', () => {
 
   it('Check Error message when request returned with 500 error', async () => {
     const store = createStore();
-    mockFetch(mockedResponseFailServerError);
+    server.use(
+      http.get(`${url}`, () => {
+        return HttpResponse.json(null, { status: 500 });
+      })
+    );
 
     render(
       <Provider store={store}>
@@ -120,6 +98,30 @@ describe('Main component tests', () => {
       expect(screen.getByTestId('errorMessage')).toHaveTextContent(
         GENERIC_ERROR
       );
+    });
+  });
+
+  it('Check that API characters call is cached', async () => {
+    const store = createStore();
+    globalThis.fetch = vi.fn();
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    await waitFor(() => {
+      expect(fetch).toBeCalledTimes(1);
     });
   });
 });

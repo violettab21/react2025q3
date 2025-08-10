@@ -5,7 +5,7 @@ import type { SerializedError } from '@reduxjs/toolkit/react';
 export interface ResultsProps {
   characters: Character[];
   isLoading: boolean;
-  error: FetchBaseQueryError | SerializedError | undefined;
+  error?: FetchBaseQueryError | SerializedError | undefined;
   isFetching: boolean;
   isError: boolean;
   pageCount: number;

@@ -1,6 +1,9 @@
 import { vi } from 'vitest';
 import type { Character, CharactersResponse } from '../types';
 import { Component } from 'react';
+import { http, HttpResponse } from 'msw';
+import { url } from '../constants';
+import { setupServer } from 'msw/node';
 
 export const mockedResponse: CharactersResponse = {
   info: {
@@ -519,3 +522,13 @@ export class MockedComponent extends Component {
     );
   }
 }
+
+const handlers = [
+  http.get(`${url}`, () => {
+    return HttpResponse.json(mockedResponse);
+  }),
+  http.get(`${url}/1`, () => {
+    return HttpResponse.json(character);
+  }),
+];
+export const server = setupServer(...handlers);
