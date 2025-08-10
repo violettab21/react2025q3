@@ -23,7 +23,7 @@ export const Search = ({
       ></input>
       <button className="searchButton" onClick={searchCharactersHandler}>
         Search
-      </button>
+      </button>{' '}
     </div>
   );
 };

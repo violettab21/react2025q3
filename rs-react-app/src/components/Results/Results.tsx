@@ -4,26 +4,37 @@ import { Loader } from '../Loader/Loader';
 import type { ResultsProps } from './types';
 
 import { ResultRow } from '../ResultRow/ResultRow';
+import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../constants';
 
 export const Results = ({
   characters,
   isLoading,
+  isFetching,
+  isError,
   error,
   pageCount,
   currentPage,
   setCurrentPage,
 }: ResultsProps) => {
-  if (error) {
-    return (
-      <p data-testid="errorMessage" className="errorMessage">
-        {error}
-      </p>
-    );
+  if (isError) {
+    if (error && 'status' in error) {
+      return (
+        <p data-testid="errorMessage" className="errorMessage">
+          {error.status === 404 ? NOT_FOUND_MESSAGE : GENERIC_ERROR}
+        </p>
+      );
+    } else {
+      return (
+        <p data-testid="errorMessage" className="errorMessage">
+          {GENERIC_ERROR}
+        </p>
+      );
+    }
   }
 
   return (
     <div className="resultsContainer">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <Loader />
       ) : (
         <>

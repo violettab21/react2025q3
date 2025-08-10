@@ -7,6 +7,7 @@ import { mockedCharactersList } from '../../__tests__/mocks';
 import { MemoryRouter } from 'react-router-dom';
 import { createStore } from '../../store/store';
 import { Provider } from 'react-redux';
+import { GENERIC_ERROR } from '../../constants';
 
 describe('Results component tests', () => {
   it('Check that Results component renders with correct number of cards', () => {
@@ -17,7 +18,8 @@ describe('Results component tests', () => {
           <Results
             characters={mockedCharactersList}
             isLoading={false}
-            error={''}
+            isFetching={false}
+            isError={false}
             pageCount={1}
             currentPage={1}
             setCurrentPage={() => {}}
@@ -34,11 +36,11 @@ describe('Results component tests', () => {
     render(
       <Provider store={store}>
         <MemoryRouter>
-          {' '}
           <Results
             characters={mockedCharactersList}
             isLoading={true}
-            error={''}
+            isFetching={false}
+            isError={false}
             pageCount={1}
             currentPage={1}
             setCurrentPage={() => {}}
@@ -52,9 +54,8 @@ describe('Results component tests', () => {
     expect(loader).toBeInTheDocument();
   });
 
-  it('Check that Results component shows error when error message passed', () => {
+  it('Check that Results component shows error ', () => {
     const store = createStore();
-    const errorText = 'Error text';
 
     render(
       <Provider store={store}>
@@ -63,7 +64,8 @@ describe('Results component tests', () => {
           <Results
             characters={mockedCharactersList}
             isLoading={false}
-            error={errorText}
+            isError={true}
+            isFetching={false}
             pageCount={1}
             currentPage={1}
             setCurrentPage={() => {}}
@@ -71,7 +73,7 @@ describe('Results component tests', () => {
         </MemoryRouter>
       </Provider>
     );
-    const errorMessage = screen.getByText(errorText);
+    const errorMessage = screen.getByText(GENERIC_ERROR);
     const cards = screen.queryAllByTestId('card');
     expect(cards.length).toBe(0);
     expect(errorMessage).toBeInTheDocument();
@@ -86,7 +88,8 @@ describe('Results component tests', () => {
           <Results
             characters={mockedCharactersList}
             isLoading={false}
-            error={''}
+            isError={false}
+            isFetching={false}
             pageCount={4}
             currentPage={1}
             setCurrentPage={() => {}}
