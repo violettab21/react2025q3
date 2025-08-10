@@ -1,22 +1,34 @@
-import { describe, it, expect, beforeAll, vi, beforeEach } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  vi,
+  beforeEach,
+  afterEach,
+  afterAll,
+} from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { NotFoundPage } from './NotFoundPage';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { MainPage } from '../Main/MainPage';
 import { Layout } from '../Layout/Layout';
-import { mockedResponseSuccess, mockFetch } from '../../__tests__/mocks';
+import { server } from '../../__tests__/mocks';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from '../../store/store';
 
 describe('NotFoundPage component tests', () => {
   beforeAll(() => {
-    mockFetch(mockedResponseSuccess);
+    server.listen();
   });
   beforeEach(() => {
     vi.clearAllMocks();
   });
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
   it('Check that NotFoundPage component renders correctly', () => {
     const store = createStore();
     render(

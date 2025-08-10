@@ -70,7 +70,7 @@ describe('CharacterDetails component tests', () => {
 
   it('Check that CharacterDetails response is cached', async () => {
     const store = createStore();
-    globalThis.fetch = vi.fn();
+    const spyFetch = vi.spyOn(window, 'fetch');
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/details/1']}>
@@ -118,7 +118,7 @@ describe('CharacterDetails component tests', () => {
       </Provider>
     );
     await waitFor(() => {
-      expect(fetch).toBeCalledTimes(1);
+      expect(spyFetch).toBeCalledTimes(1);
     });
   });
 

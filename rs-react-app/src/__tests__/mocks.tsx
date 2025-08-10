@@ -524,7 +524,7 @@ export class MockedComponent extends Component {
 }
 
 const handlers = [
-  http.get(`${url}`, () => {
+  http.get(`${url}/`, () => {
     return HttpResponse.json(mockedResponse);
   }),
   http.get(`${url}/1`, () => {

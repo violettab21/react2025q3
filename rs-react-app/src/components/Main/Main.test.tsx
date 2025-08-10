@@ -37,6 +37,7 @@ describe('Main component tests', () => {
 
   it('Check that data received from API in Results', async () => {
     const store = createStore();
+
     render(
       <Provider store={store}>
         <MemoryRouter>
@@ -80,6 +81,7 @@ describe('Main component tests', () => {
 
   it('Check Error message when request returned with 500 error', async () => {
     const store = createStore();
+
     server.use(
       http.get(`${url}`, () => {
         return HttpResponse.json(null, { status: 500 });
@@ -103,7 +105,8 @@ describe('Main component tests', () => {
 
   it('Check that API characters call is cached', async () => {
     const store = createStore();
-    globalThis.fetch = vi.fn();
+
+    const spyFetch = vi.spyOn(window, 'fetch');
     render(
       <Provider store={store}>
         <MemoryRouter>
@@ -121,7 +124,7 @@ describe('Main component tests', () => {
     );
 
     await waitFor(() => {
-      expect(fetch).toBeCalledTimes(1);
+      expect(spyFetch).toBeCalledTimes(1);
     });
   });
 });
