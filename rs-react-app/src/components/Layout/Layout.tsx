@@ -1,5 +1,5 @@
-import { Link, Outlet } from 'react-router-dom';
-import './layout.css';
+/*import { Link, Outlet } from 'react-router-dom';*/
+/*import './layout.css';
 import darkTheme from '../../assets/dark-theme.svg';
 import lightTheme from '../../assets/light-theme.svg';
 import { ThemeContext } from '../../context/Context';
@@ -41,4 +41,4 @@ export const Layout = () => {
       </main>
     </>
   );
-};
+};*/

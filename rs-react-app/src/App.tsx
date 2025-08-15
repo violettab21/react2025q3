@@ -1,13 +1,13 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+/*import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { MainPage } from './components/Main/MainPage';
 import { CharacterDetails } from './components/CharacterDetails/CharacterDetails';
 import { About } from './components/About/About';
 import { Layout } from './components/Layout/Layout';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { useState } from 'react';
-import { ThemeContext } from './context/Context';
+import { ThemeContext } from './context/Context';*/
 
-const router = createBrowserRouter(
+/*const router = createBrowserRouter(
   [
     {
       element: <Layout />,
@@ -32,9 +32,9 @@ const router = createBrowserRouter(
   {
     basename: '/rs-react-app',
   }
-);
+);*/
 
-export const App = () => {
+/*export const App = () => {
   const [theme, setTheme] = useState('light');
 
   return (
@@ -42,4 +42,4 @@ export const App = () => {
       <RouterProvider router={router} />
     </ThemeContext>
   );
-};
+};*/

@@ -26,33 +26,7 @@
   border: none;
 }
 
-.menu {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  gap: 1rem;
-  align-items: center;
-}
 
-.menuItem {
-  border-radius: 6px;
-  padding: 0.3rem 0.5rem;
-  text-align: center;
-  color: black;
-}
-
-.menuItem-light {
-  background-color: white;
-}
-
-.menuItem-dark {
-  background-color: #939ea5;
-}
-
-.link {
-  text-decoration: none;
-  color: black;
-}
 
 .main {
   padding: 1rem;

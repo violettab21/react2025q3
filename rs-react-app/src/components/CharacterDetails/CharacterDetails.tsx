@@ -1,15 +1,21 @@
+'use client';
 import './characterDetails.css';
 import { Loader } from '../Loader/Loader';
 import image from '../../assets/close.svg';
 import refreshIcon from '../../assets/refresh.svg';
 import { useCharacterDetails } from './hooks/useCharacterDetails';
 import { ThemeContext } from '../../context/Context';
-import { useContext } from 'react';
+import { use, useContext } from 'react';
 import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../constants';
 
-export const CharacterDetails = () => {
+export const CharacterDetails = ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = use(params);
   const { data, isLoading, isFetching, isError, error, refetch, closeDetails } =
-    useCharacterDetails();
+    useCharacterDetails(id);
   const currentTheme = useContext(ThemeContext);
 
   return (

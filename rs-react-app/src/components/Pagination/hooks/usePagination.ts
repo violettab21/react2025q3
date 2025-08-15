@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+/*import { useSearchParams } from 'react-router-dom';*/
 
 const maxVisiblePages = 5;
 
@@ -7,7 +7,7 @@ export const usePagination = (
   currentPage: number,
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 ) => {
-  const [, setSearchParams] = useSearchParams();
+  /*const [, setSearchParams] = useSearchParams();*/
 
   const getPageNumberArray = (): number[] => {
     const array = [];
@@ -34,18 +34,18 @@ export const usePagination = (
 
   const prevButtonHandler = () => {
     if (currentPage === 1) return;
-    setSearchParams(`?page=${currentPage - 1}`);
+    /*setSearchParams(`?page=${currentPage - 1}`);*/
     setCurrentPage(currentPage - 1);
   };
 
   const nextButtonHandler = () => {
     if (currentPage === pageCount) return;
-    setSearchParams(`?page=${currentPage + 1}`);
+    /*setSearchParams(`?page=${currentPage + 1}`);*/
     setCurrentPage(currentPage + 1);
   };
 
   const pageButtonHandler = (page: number) => {
-    setSearchParams(`?page=${page}`);
+   /* setSearchParams(`?page=${page}`);*/
     setCurrentPage(page);
   };
 

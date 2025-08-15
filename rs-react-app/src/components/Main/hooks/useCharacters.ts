@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { LOCAL_STORAGE_KEY } from '../../../constants';
-import { useSearchParams } from 'react-router-dom';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useGetCharactersQuery } from '../../../store/api';
 
 export const useCharacters = () => {
   const { savedValue, setSavedValue } = useLocalStorage(LOCAL_STORAGE_KEY);
-  const [searchParams, setSearchParams] = useSearchParams();
+  /*const [searchParams, setSearchParams] = useSearchParams();*/
   const [currentPage, setCurrentPage] = useState(() => {
-    const page = searchParams.get('page');
+    /*const page = searchParams.get('page');*/
+    const page = 1;
     return page ? Number(page) : 1;
   });
 
@@ -30,9 +30,9 @@ export const useCharacters = () => {
     searchTerm: savedValue,
   });
 
-  useEffect(() => {
+  /* useEffect(() => {
     setSearchParams(`page=${currentPage}`);
-  }, [currentPage, setSearchParams]);
+  }, [currentPage, setSearchParams]);*/
 
   const handleSearch = async (searchTerm: string) => {
     setCurrentPage(1);

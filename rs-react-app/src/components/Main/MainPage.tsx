@@ -1,10 +1,11 @@
+'use client';
+
 import './main.css';
 import { GENERIC_ERROR } from '../../constants';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
 import { useCharacters } from './hooks/useCharacters';
-import { Outlet } from 'react-router-dom';
 import { Flyout } from '../Flyout/Flyout';
 import refreshIcon from '../../assets/refresh.svg';
 
@@ -48,10 +49,6 @@ export const MainPage = () => {
           </div>
 
           <Flyout />
-        </div>
-
-        <div className="right">
-          <Outlet />
         </div>
       </ErrorBoundary>
     </div>
