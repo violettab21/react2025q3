@@ -1,4 +1,3 @@
-/*import { Link } from 'react-router-dom';*/
 import Link from 'next/link';
 import './notFoundPage.css';
 
