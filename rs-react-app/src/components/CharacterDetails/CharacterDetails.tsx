@@ -5,6 +5,7 @@ import refreshIcon from '../../assets/refresh.svg';
 import { ThemeContext } from '../../context/Context';
 import { useContext } from 'react';
 import { Character } from '../../types';
+import Image from 'next/image';
 
 export const CharacterDetails = ({ character }: { character: Character }) => {
   const currentTheme = useContext(ThemeContext);
@@ -18,16 +19,19 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
             console.log('hello');
           }}
         >
-          <img src={image}></img>
+          <Image src={image} alt="close" />
         </button>
 
         <>
           <div className="characterImageContainer">
-            <img
-              className="characterImage"
+            <Image
               src={character.image}
               alt="character image"
-            ></img>
+              className="characterImage"
+              width={300}
+              height={200}
+              priority
+            />
           </div>
 
           <div className="characterDetailsInfo">
@@ -44,7 +48,12 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
               console.log('refresh');
             }}
           >
-            <img className="refresh" src={refreshIcon} alt="refresh"></img>
+            <Image
+              className="refresh"
+              src={refreshIcon}
+              alt="refresh"
+              priority
+            />
           </button>
         </>
       </>

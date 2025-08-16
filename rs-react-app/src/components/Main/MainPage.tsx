@@ -7,6 +7,7 @@ import { Results } from '../Results/Results';
 import { useCharacters } from './hooks/useCharacters';
 import { Flyout } from '../Flyout/Flyout';
 import refreshIcon from '../../assets/refresh.svg';
+import Image from 'next/image';
 
 export const MainPage = () => {
   const {
@@ -31,7 +32,12 @@ export const MainPage = () => {
         <div className="left">
           <Search handleSearch={handleSearch} />
           <button className="refreshButton" onClick={refetch}>
-            <img className="refresh" src={refreshIcon} alt="refresh"></img>
+            <Image
+              className="refresh"
+              src={refreshIcon}
+              alt="refresh"
+              priority
+            />
           </button>
 
           <div>

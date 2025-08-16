@@ -7,8 +7,6 @@ export default async function CharacterDetailsPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   const { id } = await params;
   const response = await fetch(`${url}/${id}`);
   const responseData: Character = await response.json();
