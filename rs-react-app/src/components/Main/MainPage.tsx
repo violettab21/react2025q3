@@ -1,5 +1,4 @@
 'use client';
-
 import './main.css';
 import { GENERIC_ERROR } from '../../constants';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';

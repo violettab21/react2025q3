@@ -1,5 +1,3 @@
-'use client';
-
 import './results.css';
 import { Pagination } from '../Pagination/Pagination';
 import { Loader } from '../Loader/Loader';

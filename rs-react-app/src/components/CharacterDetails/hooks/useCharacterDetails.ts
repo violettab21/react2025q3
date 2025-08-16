@@ -1,16 +1,15 @@
-/*import { useNavigate, useParams, useSearchParams } from 'react-router-dom';*/
-
+'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useGetCharacterQuery } from '../../../store/api';
 
 export const useCharacterDetails = (id: string) => {
-  /*const { id } = useParams();
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();*/
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { data, isLoading, isFetching, isError, error, refetch } =
     useGetCharacterQuery(Number(id));
 
   const closeDetails = () => {
-    /* navigate(`/?page=${searchParams.get('page') || 1}`);*/
+    router.push(`/?page=${searchParams.get('page') || 1}`);
     console.log('hello');
   };
 

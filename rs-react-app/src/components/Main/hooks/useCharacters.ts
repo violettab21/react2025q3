@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { LOCAL_STORAGE_KEY } from '../../../constants';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useGetCharactersQuery } from '../../../store/api';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useCharacters = () => {
   const { savedValue, setSavedValue } = useLocalStorage(LOCAL_STORAGE_KEY);
-  /*const [searchParams, setSearchParams] = useSearchParams();*/
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const [currentPage, setCurrentPage] = useState(() => {
-    /*const page = searchParams.get('page');*/
-    const page = 1;
+    const page = searchParams.get('page');
     return page ? Number(page) : 1;
   });
 
@@ -30,9 +32,12 @@ export const useCharacters = () => {
     searchTerm: savedValue,
   });
 
-  /* useEffect(() => {
-    setSearchParams(`page=${currentPage}`);
-  }, [currentPage, setSearchParams]);*/
+  useEffect(() => {
+    console.log(currentPage);
+    const params = new URLSearchParams(searchParams);
+    params.set('page', currentPage.toString());
+    replace(`${pathname}?${params.toString()}`);
+  }, [currentPage]);
 
   const handleSearch = async (searchTerm: string) => {
     setCurrentPage(1);

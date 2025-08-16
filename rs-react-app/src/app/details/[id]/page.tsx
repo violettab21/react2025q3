@@ -1,16 +1,16 @@
 import { CharacterDetails } from '../../../components/CharacterDetails/CharacterDetails';
-import { MainPage } from '../../../components/Main/MainPage';
-import StoreProvider from '../../../store/StoreProvider';
+import { url } from '../../../constants';
+import { Character } from '../../../types';
 
-export default function Page({
+export default async function CharacterDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  return (
-    <StoreProvider>
-      <MainPage></MainPage>
-      <CharacterDetails params={Promise.resolve(params)} />
-    </StoreProvider>
-  );
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  const { id } = await params;
+  const response = await fetch(`${url}/${id}`);
+  const responseData: Character = await response.json();
+  return <CharacterDetails character={responseData} />;
 }
