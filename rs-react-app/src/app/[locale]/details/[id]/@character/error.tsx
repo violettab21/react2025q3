@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
-import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../../../../constants';
-import { CharacterDetailsWrapper } from '../../../../components/CharacterDetails/parts/CharacterDetailsWrapper';
-import { CloseButton } from '../../../../components/CharacterDetails/parts/CloseButton';
+import { useEffect } from "react";
+import { CharacterDetailsWrapper } from "../../../../../components/CharacterDetails/parts/CharacterDetailsWrapper";
+import { CloseButton } from "../../../../../components/CharacterDetails/parts/CloseButton";
+import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from "../../../../../constants";
+
 
 export default function Error({ error }: { error: Error }) {
   useEffect(() => {

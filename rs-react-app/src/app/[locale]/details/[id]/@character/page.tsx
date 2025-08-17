@@ -1,8 +1,9 @@
-import { Character } from '../../../../../types';
-import { CharacterDetails } from '../../../../components/CharacterDetails/CharacterDetails';
-import { url } from '../../../../../constants';
+import { CharacterDetails } from "../../../../../components/CharacterDetails/CharacterDetails";
+import { url } from "../../../../../constants";
+import { Character } from "../../../../../types";
 
-export default async function Page({
+
+export default async function CharacterPage({
   params,
 }: {
   params: Promise<{ id: string }>;

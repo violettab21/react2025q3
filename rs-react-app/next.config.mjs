@@ -8,8 +8,7 @@ const withNextIntl = createNextIntlPlugin({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* output: 'export',*/
-  distDir: './dist',
+  distDir: './.next',
   basePath: '/rs-react-app',
   images: {
     remotePatterns: [

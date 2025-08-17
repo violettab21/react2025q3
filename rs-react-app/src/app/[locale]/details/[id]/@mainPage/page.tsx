@@ -1,7 +1,8 @@
-import { MainPage } from '../../../../components/Main/MainPage';
-import StoreProvider from '../../../../../store/StoreProvider';
+import { MainPage } from "../../../../../components/Main/MainPage";
+import StoreProvider from "../../../../../store/StoreProvider";
 
-export default async function Page({
+
+export default async function HomePage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string; search?: string }>;
