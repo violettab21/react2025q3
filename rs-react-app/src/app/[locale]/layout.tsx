@@ -1,7 +1,10 @@
-import { Header } from '../../components/Header/Header';
+import { Header } from '../components/Header/Header';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { routing } from '../../i18n/routing';
 import { notFound } from 'next/navigation';
+import { ThemeProvider } from '../components/Theme/Theme';
+import { MainWrapper } from '../components/MainWrapper/MainWrapper';
+import './global.css';
 
 export default async function LocaleLayout({
   children,
@@ -21,8 +24,10 @@ export default async function LocaleLayout({
       </head>
       <body>
         <NextIntlClientProvider>
-          <Header />
-          {children}
+          <ThemeProvider>
+            <Header />
+            <MainWrapper> {children}</MainWrapper>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

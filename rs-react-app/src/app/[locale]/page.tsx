@@ -1,4 +1,4 @@
-import { MainPage } from '../../components/Main/MainPage';
+import { MainPage } from '../components/Main/MainPage';
 import StoreProvider from '../../store/StoreProvider';
 export default async function Page({
   searchParams,
