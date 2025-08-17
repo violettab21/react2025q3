@@ -1,6 +1,6 @@
-import { CharacterDetails } from '../../../components/CharacterDetails/CharacterDetails';
-import { url } from '../../../constants';
-import { Character } from '../../../types';
+import { CharacterDetails } from '../../../../components/CharacterDetails/CharacterDetails';
+import { url } from '../../../../constants';
+import { Character } from '../../../../types';
 
 export default async function CharacterDetailsPage({
   params,

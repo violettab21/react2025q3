@@ -8,11 +8,13 @@ import {
 } from '../../store/store';
 import './flyout.css';
 import { prepareFile } from './helpers';
+import { useTranslations } from 'next-intl';
 
 export const Flyout = () => {
   const dispatch = useAppDispatch();
   const selectedCharacters = useAppSelector((state) => state.selectedCards);
   const theme = useContext(ThemeContext);
+  const t = useTranslations('Flyout');
 
   if (selectedCharacters.length === 0) {
     return null;
@@ -20,21 +22,23 @@ export const Flyout = () => {
 
   return (
     <div data-testid="flyout-id" className={`flyout flyout-${theme.theme}`}>
-      <p>{selectedCharacters.length} items are selected</p>
+      <p>
+        {selectedCharacters.length} {t('text')}
+      </p>
       <button
         className="unselect"
         onClick={() => {
           dispatch(allResultsUnselected());
         }}
       >
-        Unselect all
+        {t('unselectAllButton')}
       </button>
       <a
         className="download"
         href={prepareFile(selectedCharacters)}
         download={`${selectedCharacters.length}_items`}
       >
-        Download
+        {t('download')}
       </a>
     </div>
   );

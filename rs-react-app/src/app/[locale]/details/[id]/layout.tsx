@@ -1,4 +1,4 @@
-import StoreProvider from '../../../store/StoreProvider';
+import StoreProvider from '../../../../store/StoreProvider';
 
 export default function DetailsLayout({
   children,

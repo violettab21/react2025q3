@@ -1,15 +1,22 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export function getStoredSearchTerm(key: string): string {
+/*export function getStoredSearchTerm(key: string): string {
   const searchTerm = localStorage.getItem(key);
 
   return searchTerm ? searchTerm : '';
-}
+}*/
 
 export const useLocalStorage = (key: string) => {
-  const [savedValue, setSavedValue] = useState(getStoredSearchTerm(key));
+  const [savedValue, setSavedValue] = useState('');
 
+  useEffect(() => {
+    const storedSearchTerm = localStorage.getItem(key);
+    if (storedSearchTerm) {
+      setSavedValue(storedSearchTerm);
+    }
+    console.log(savedValue);
+  }, [savedValue, key]);
   const saveValueToLocalStorage = (value: string): void => {
     localStorage.setItem(key, value);
     setSavedValue(value);

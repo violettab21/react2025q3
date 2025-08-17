@@ -17,20 +17,25 @@ export const MainPage = () => {
     },
     isLoading,
     isFetching,
-
     isError,
     error,
     handleSearch,
     currentPage,
     setCurrentPage,
     refetch,
+    savedValue,
+    saveValueToLocalStorage,
   } = useCharacters();
 
   return (
     <div className="mainPage">
       <ErrorBoundary fallback={GENERIC_ERROR}>
         <div className="left">
-          <Search handleSearch={handleSearch} />
+          <Search
+            handleSearch={handleSearch}
+            savedValue={savedValue}
+            saveValueToLocalStorage={saveValueToLocalStorage}
+          />
           <button className="refreshButton" onClick={refetch}>
             <Image
               className="refresh"

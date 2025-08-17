@@ -6,14 +6,12 @@ import { useGetCharactersQuery } from '../../../store/api';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useCharacters = () => {
-  const { savedValue, setSavedValue } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const { savedValue, setSavedValue, saveValueToLocalStorage } =
+    useLocalStorage(LOCAL_STORAGE_KEY);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [currentPage, setCurrentPage] = useState(() => {
-    const page = searchParams.get('page');
-    return page ? Number(page) : 1;
-  });
+  const [currentPage, setCurrentPage] = useState(1);
 
   const {
     data = {
@@ -34,11 +32,15 @@ export const useCharacters = () => {
   });
 
   useEffect(() => {
+    () => {
+      const page = searchParams.get('page');
+      if (page) setCurrentPage(Number(page));
+    };
     console.log(currentPage);
     const params = new URLSearchParams(searchParams);
     params.set('page', currentPage.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, [currentPage]);
+  }, [currentPage, pathname, replace, searchParams]);
 
   const handleSearch = async (searchTerm: string) => {
     setCurrentPage(1);
@@ -55,5 +57,7 @@ export const useCharacters = () => {
     currentPage,
     setCurrentPage,
     refetch,
+    savedValue,
+    saveValueToLocalStorage,
   };
 };

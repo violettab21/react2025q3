@@ -1,14 +1,12 @@
-import { useState } from 'react';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
-import { LOCAL_STORAGE_KEY } from '../../../constants';
+import { useEffect, useState } from 'react';
 
 export const useSearch = (
-  handleSearch: (searchTerm: string) => Promise<void>
+  handleSearch: (searchTerm: string) => Promise<void>,
+  savedValue: string,
+  saveValueToLocalStorage: (value: string) => void
 ) => {
-  const { savedValue, saveValueToLocalStorage } =
-    useLocalStorage(LOCAL_STORAGE_KEY);
-  const [searchValue, setSearchValue] = useState(savedValue);
-
+  const [searchValue, setSearchValue] = useState('');
+  console.log(searchValue);
   const searchCharactersChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -20,9 +18,13 @@ export const useSearch = (
   const searchCharactersHandler = () => {
     const search = searchValue.trim();
     void handleSearch(search);
-    setSearchValue(search);
     saveValueToLocalStorage(search);
+    setSearchValue(search);
   };
+  useEffect(() => {
+    setSearchValue(savedValue);
+    console.log(savedValue);
+  }, [savedValue]);
 
   return {
     searchValue,
