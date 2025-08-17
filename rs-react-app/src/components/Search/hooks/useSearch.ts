@@ -9,7 +9,7 @@ export const useSearch = () => {
   const [searchValue, setSearchValue] = useState('');
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   const searchCharactersChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -23,7 +23,7 @@ export const useSearch = () => {
     const params = new URLSearchParams(searchParams);
     params.set('search', searchTerm);
     params.set('page', '1');
-    replace(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   const searchCharactersHandler = () => {
@@ -34,7 +34,11 @@ export const useSearch = () => {
   };
   useEffect(() => {
     setSearchValue(savedValue);
-    console.log(savedValue);
+    if (savedValue) {
+      const params = new URLSearchParams(searchParams);
+      params.set('search', savedValue);
+      router.push(`${pathname}?${params.toString()}`);
+    }
   }, [savedValue]);
 
   return {

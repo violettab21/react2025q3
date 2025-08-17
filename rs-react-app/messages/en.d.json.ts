@@ -3,7 +3,7 @@
 
 declare const messages: {
   "MainPage": {
-    "searchText": "Search for Rick and Morty character:",
+    "searchText": "Search for Rick and Morty character",
     "searchPlaceholder": "Search"
   },
   "NotFoundPage": {
