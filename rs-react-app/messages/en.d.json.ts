@@ -6,6 +6,10 @@ declare const messages: {
     "searchText": "Search for Rick and Morty character:",
     "searchPlaceholder": "Search"
   },
+  "NotFoundPage": {
+    "text": "Page is not found",
+    "button": "Go to Home"
+  },
   "AboutPage": {
     "author": "Author: Violetta Batsura",
     "aboutText": "This is application that was developed in scope of React Course to master skills in React",

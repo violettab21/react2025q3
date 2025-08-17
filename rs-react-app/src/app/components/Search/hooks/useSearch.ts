@@ -4,7 +4,7 @@ import { LOCAL_STORAGE_KEY } from '../../../../constants';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useSearch = () => {
-  const { savedValue, setSavedValue, saveValueToLocalStorage } =
+  const { savedValue, saveValueToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
   const [searchValue, setSearchValue] = useState('');
   const searchParams = useSearchParams();
