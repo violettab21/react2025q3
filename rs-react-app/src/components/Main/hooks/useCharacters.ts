@@ -32,11 +32,9 @@ export const useCharacters = () => {
   });
 
   useEffect(() => {
-    () => {
-      const page = searchParams.get('page');
-      if (page) setCurrentPage(Number(page));
-    };
-    console.log(currentPage);
+    const page = searchParams.get('page');
+    if (page) setCurrentPage(Number(page));
+
     const params = new URLSearchParams(searchParams);
     params.set('page', currentPage.toString());
     replace(`${pathname}?${params.toString()}`);

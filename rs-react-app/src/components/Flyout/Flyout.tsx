@@ -33,13 +33,24 @@ export const Flyout = () => {
       >
         {t('unselectAllButton')}
       </button>
-      <a
+
+      <button
+        onClick={() => {
+          prepareFile(selectedCharacters).then((finalString) => {
+            const file = new Blob([finalString], { type: 'text/csv' });
+            const url = URL.createObjectURL(file);
+            const link = document.createElement('a');
+            link.setAttribute('download', `${selectedCharacters.length}_items`);
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
+        }}
         className="download"
-        href={prepareFile(selectedCharacters)}
-        download={`${selectedCharacters.length}_items`}
       >
         {t('download')}
-      </a>
+      </button>
     </div>
   );
 };
