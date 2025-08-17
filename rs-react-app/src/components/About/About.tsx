@@ -1,23 +1,23 @@
+import { Link } from '../../i18n/navigation';
 import './about.css';
+import { useTranslations } from 'next-intl';
 
 export const About = () => {
+  const t = useTranslations('AboutPage');
   return (
     <div data-testid="about" className="aboutContainer">
-      <p>Author: Violetta Batsura</p>
+      <p>{t('author')}</p>
+      <p>{t('aboutText')}</p>
       <p>
-        This is application that was developed in scope of React Course to
-        master skills in React
-      </p>
-      <p>
-        Course:{' '}
-        <a
+        {t('label')}
+        <Link
           href="https://rs.school/courses/reactjs"
           target="_blank"
           rel="noreferrer"
           className="courseLink"
         >
-          RS School React course
-        </a>
+          {t('linkText')}
+        </Link>
       </p>
     </div>
   );

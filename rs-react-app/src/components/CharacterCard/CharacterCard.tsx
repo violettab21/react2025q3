@@ -1,25 +1,36 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+'use client';
 import type { Character } from '../../types';
 import './characterCard.css';
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/Context';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useTheme } from '../Theme/Theme';
 export const CharacterCard = ({ character }: { character: Character }) => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const theme = useContext(ThemeContext);
+  const t = useTranslations('CharacterDetails');
+  const theme = useTheme();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   return (
     <button
       onClick={() => {
-        navigate(
-          `details/${character.id}?page=${searchParams.get('page') || 1}`
+        const page = searchParams.get('page');
+        const search = searchParams.get('search');
+        const searchPart = search ? `&search=${search}` : '';
+        router.push(
+          `/details/${character.id}?page=${page ? page : 1}${searchPart}`
         );
       }}
       data-testid="card"
       className={`cardContainer cardContainer-${theme.theme}`}
     >
       <div className="characterInfo">
-        <p>Name: {character.name}</p>
-        <p>Gender: {character.gender}</p>
+        <p>
+          {t('name')}: {character.name}
+        </p>
+        <p>
+          {t('gender')}: {character.gender}
+        </p>
       </div>
     </button>
   );
