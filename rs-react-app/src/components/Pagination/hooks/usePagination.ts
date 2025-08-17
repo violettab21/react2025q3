@@ -1,10 +1,15 @@
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 const maxVisiblePages = 5;
 
 export const usePagination = (
   pageCount: number,
-  currentPage: number,
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+  currentPage: number
+  /*setCurrentPage: React.Dispatch<React.SetStateAction<number>>*/
 ) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const getPageNumberArray = (): number[] => {
     const array = [];
     if (pageCount < maxVisiblePages) {
@@ -30,19 +35,26 @@ export const usePagination = (
 
   const prevButtonHandler = () => {
     if (currentPage === 1) return;
-    /*setSearchParams(`?page=${currentPage - 1}`);*/
-    setCurrentPage(currentPage - 1);
+    const params = new URLSearchParams(searchParams);
+    params.set('page', (currentPage - 1).toString());
+    replace(`${pathname}?${params.toString()}`);
+    /* setCurrentPage(currentPage - 1);*/
   };
 
   const nextButtonHandler = () => {
     if (currentPage === pageCount) return;
-    /*setSearchParams(`?page=${currentPage + 1}`);*/
-    setCurrentPage(currentPage + 1);
+    const params = new URLSearchParams(searchParams);
+    params.set('page', (currentPage + 1).toString());
+    replace(`${pathname}?${params.toString()}`);
+
+    /* setCurrentPage(currentPage + 1);*/
   };
 
   const pageButtonHandler = (page: number) => {
-    /* setSearchParams(`?page=${page}`);*/
-    setCurrentPage(page);
+    const params = new URLSearchParams(searchParams);
+    params.set('page', page.toString());
+    replace(`${pathname}?${params.toString()}`);
+    /* setCurrentPage(page);*/
   };
 
   return {

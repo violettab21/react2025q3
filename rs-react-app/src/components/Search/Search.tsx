@@ -1,21 +1,14 @@
+'use client';
 import './search.css';
 import { useSearch } from './hooks/useSearch';
 import { useTranslations } from 'next-intl';
 
-export const Search = ({
-  handleSearch,
-  savedValue,
-  saveValueToLocalStorage,
-}: {
-  handleSearch: (searchTerm: string) => Promise<void>;
-  savedValue: string;
-  saveValueToLocalStorage: (value: string) => void;
-}) => {
+export const Search = () => {
   const {
     searchValue,
     searchCharactersChangeHandler,
     searchCharactersHandler,
-  } = useSearch(handleSearch, savedValue, saveValueToLocalStorage);
+  } = useSearch();
 
   console.log(searchValue);
   const t = useTranslations('MainPage');

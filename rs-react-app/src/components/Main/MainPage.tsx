@@ -1,66 +1,37 @@
-'use client';
 import './main.css';
-import { GENERIC_ERROR } from '../../constants';
-import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
-import { useCharacters } from './hooks/useCharacters';
 import { Flyout } from '../Flyout/Flyout';
 import refreshIcon from '../../assets/refresh.svg';
 import Image from 'next/image';
 
-export const MainPage = () => {
-  const {
-    data: {
-      results,
-      info: { pages },
-    },
-    isLoading,
-    isFetching,
-    isError,
-    error,
-    handleSearch,
-    currentPage,
-    setCurrentPage,
-    refetch,
-    savedValue,
-    saveValueToLocalStorage,
-  } = useCharacters();
-
+export const MainPage = ({
+  page,
+  search,
+}: {
+  page: string;
+  search?: string;
+}) => {
   return (
     <div className="mainPage">
-      <ErrorBoundary fallback={GENERIC_ERROR}>
-        <div className="left">
-          <Search
-            handleSearch={handleSearch}
-            savedValue={savedValue}
-            saveValueToLocalStorage={saveValueToLocalStorage}
-          />
-          <button className="refreshButton" onClick={refetch}>
-            <Image
-              className="refresh"
-              src={refreshIcon}
-              alt="refresh"
-              priority
-            />
-          </button>
+      <div className="left">
+        <Search />
 
-          <div>
-            <Results
-              characters={results}
-              isLoading={isLoading}
-              isFetching={isFetching}
-              isError={isError}
-              error={error}
-              pageCount={pages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </div>
-
-          <Flyout />
+        <div>
+          <Results page={page} search={search} />
         </div>
-      </ErrorBoundary>
+
+        <Flyout />
+      </div>
     </div>
   );
 };
+
+/* <button
+          className="refreshButton"
+          onClick={() => {
+            console.log('hello');
+          }}
+        >
+          <Image className="refresh" src={refreshIcon} alt="refresh" priority />
+        </button>*/

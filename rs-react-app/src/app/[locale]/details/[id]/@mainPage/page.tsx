@@ -1,11 +1,15 @@
-'use client';
 import { MainPage } from '../../../../../components/Main/MainPage';
 import StoreProvider from '../../../../../store/StoreProvider';
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string; search?: string }>;
+}) {
+  const { page = '1', search } = await searchParams;
   return (
     <StoreProvider>
-      <MainPage />
+      <MainPage page={page} search={search} />
     </StoreProvider>
   );
 }

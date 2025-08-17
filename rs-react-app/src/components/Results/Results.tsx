@@ -1,22 +1,27 @@
 import './results.css';
 import { Pagination } from '../Pagination/Pagination';
 import { Loader } from '../Loader/Loader';
-import type { ResultsProps } from './types';
 
 import { ResultRow } from '../ResultRow/ResultRow';
-import { GENERIC_ERROR, NOT_FOUND_MESSAGE } from '../../constants';
+import { url } from '../../constants';
+import { CharactersResponse } from '../../types';
 
-export const Results = ({
-  characters,
-  isLoading,
-  isFetching,
-  isError,
-  error,
-  pageCount,
-  currentPage,
-  setCurrentPage,
-}: ResultsProps) => {
-  if (isError) {
+export const Results = async ({
+  page,
+  search,
+}: {
+  page: string;
+  search?: string;
+}) => {
+  const urlForRequest = search
+    ? `${url}/?page=${page}&name=${search}`
+    : `${url}/?page=${page}`;
+
+  const response = await fetch(urlForRequest);
+
+  const responseData: CharactersResponse = await response.json();
+
+  /* if (isError) {
     if (error && 'status' in error) {
       return (
         <p data-testid="errorMessage" className="errorMessage">
@@ -30,27 +35,25 @@ export const Results = ({
         </p>
       );
     }
-  }
+  }*/
 
   return (
     <div className="resultsContainer">
-      {isLoading || isFetching ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="charactersList">
-            {characters.map((character) => (
-              <ResultRow key={character.id} character={character} />
-            ))}
-          </div>
+      (
+      <>
+        <div className="charactersList">
+          {responseData.results.map((character) => (
+            <ResultRow key={character.id} character={character} />
+          ))}
+        </div>
 
-          <Pagination
-            pageCount={pageCount}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          ></Pagination>
-        </>
-      )}
+        <Pagination
+          pageCount={responseData.info.pages}
+          currentPage={Number(page)}
+          /* setCurrentPage={setCurrentPage}*/
+        ></Pagination>
+      </>
+      )
     </div>
   );
 };

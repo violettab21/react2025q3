@@ -6,7 +6,7 @@ import { ThemeContext } from '../../context/Context';
 import { useContext } from 'react';
 import { Character } from '../../types';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export const CharacterDetails = ({ character }: { character: Character }) => {
@@ -14,6 +14,7 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
   const t = useTranslations('CharacterDetails');
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
 
   return (
     <div className={`characterDetails characterDetails-${currentTheme.theme}`}>
@@ -23,7 +24,7 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
           onClick={() => {
             const page = searchParams.get('page');
 
-            router.push(`/?page=${page ? page : '1'}`);
+            router.push(`/${locale}?page=${page ? page : '1'}`);
           }}
         >
           <Image src={image} alt="close" />

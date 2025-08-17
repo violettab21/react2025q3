@@ -1,4 +1,3 @@
-'use client';
 import { useEffect, useState } from 'react';
 import { LOCAL_STORAGE_KEY } from '../../../constants';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
