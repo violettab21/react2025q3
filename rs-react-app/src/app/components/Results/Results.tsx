@@ -15,7 +15,13 @@ export const Results = async ({
   const urlForRequest = search
     ? `${url}/?page=${page}&name=${search}`
     : `${url}/?page=${page}`;
-  const response = await fetch(urlForRequest);
+  const response = await fetch(urlForRequest, {
+    method: 'GET',
+    cache: 'force-cache',
+    next: {
+      tags: [`characters`],
+    },
+  });
   if (!response.ok) {
     if (response.status === 404) {
       return (

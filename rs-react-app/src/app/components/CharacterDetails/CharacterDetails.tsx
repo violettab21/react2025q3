@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import { CloseButton } from './parts/CloseButton';
 import { CharacterDetailsWrapper } from './parts/CharacterDetailsWrapper';
+import { Refresh } from './parts/Refresh';
 
 export const CharacterDetails = ({ character }: { character: Character }) => {
   const t = useTranslations('CharacterDetails');
@@ -14,7 +15,6 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
     <CharacterDetailsWrapper>
       <>
         <CloseButton />
-
         <>
           <div className="characterImageContainer">
             <Image
@@ -48,16 +48,8 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
             </p>
           </div>
         </>
+        <Refresh id={character.id.toString()} />
       </>
     </CharacterDetailsWrapper>
   );
 };
-/*
-  <button
-          className="refreshImageContainer"
-          onClick={() => {
-            console.log('refresh');
-          }}
-        >
-          <Image className="refresh" src={refreshIcon} alt="refresh" priority />
-        </button>*/

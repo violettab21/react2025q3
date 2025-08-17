@@ -8,7 +8,13 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const response = await fetch(`${url}/${id}f`);
+  const response = await fetch(`${url}/${id}`, {
+    method: 'GET',
+    cache: 'force-cache',
+    next: {
+      tags: [`character-${id}`],
+    },
+  });
   if (!response.ok) {
     return { message: response.status };
   }

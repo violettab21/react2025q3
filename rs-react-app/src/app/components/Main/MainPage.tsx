@@ -2,10 +2,9 @@ import './main.css';
 import { Search } from '../Search/Search';
 import { Results } from '../Results/Results';
 import { Flyout } from '../Flyout/Flyout';
-import refreshIcon from '../../assets/refresh.svg';
-import Image from 'next/image';
 import { Suspense } from 'react';
 import { Loader } from '../Loader/Loader';
+import { Refresh } from './parts/Refresh';
 
 export const MainPage = ({
   page,
@@ -18,6 +17,7 @@ export const MainPage = ({
     <div className="mainPage">
       <div className="left">
         <Search />
+        <Refresh />
         <div>
           <Suspense fallback={<Loader />}>
             <Results page={page} search={search} />
@@ -28,12 +28,3 @@ export const MainPage = ({
     </div>
   );
 };
-
-/* <button
-          className="refreshButton"
-          onClick={() => {
-            console.log('hello');
-          }}
-        >
-          <Image className="refresh" src={refreshIcon} alt="refresh" priority />
-        </button>*/
