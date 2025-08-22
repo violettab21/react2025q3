@@ -1,9 +1,10 @@
 import './App.css';
+import { MainPage } from './components/MainPage/MainPage';
 
 export const App = () => {
   return (
     <>
-      <div>Hello</div>
+      <MainPage />
     </>
   );
 };
