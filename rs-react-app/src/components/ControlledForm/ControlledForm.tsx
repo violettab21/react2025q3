@@ -42,7 +42,10 @@ const schema = yup
       .matches(/[0-9]/, 'Password must contain at least one number')
       .matches(/[\W|_]/, 'Password must contain at least one special character')
       .min(10, 'Password must contain at least 10 characters'),
-    repeatPassword: yup.string().required('Repeat Password'),
+    repeatPassword: yup
+      .string()
+      .required('Repeat Password')
+      .oneOf([yup.ref('password')], 'Passwords must match'),
     gender: yup.string().required('Gender is required'),
     country: yup.string().required('Country is required'),
     image: yup
