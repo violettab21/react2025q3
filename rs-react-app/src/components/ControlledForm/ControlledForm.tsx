@@ -73,7 +73,7 @@ export const ControlledForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -137,7 +137,9 @@ export const ControlledForm = () => {
           <input type="checkbox" {...register('terms')} />
         </label>
         {errors.terms && <p className="error-text">{errors.terms.message}</p>}
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!isValid}>
+          Submit
+        </button>
       </form>
     </div>
   );
