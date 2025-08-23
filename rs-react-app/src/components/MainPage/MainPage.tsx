@@ -1,3 +1,4 @@
+import { ControlledForm } from '../ControlledForm/ControlledForm';
 import { ModalButton } from '../ModalButton/ModalButton';
 
 export const MainPage = () => {
@@ -5,11 +6,11 @@ export const MainPage = () => {
     <main>
       <ModalButton
         name="Form1 - uncontrolled components"
-        modalContent={'hello1'}
+        modalContent={<ControlledForm />}
       />
       <ModalButton
         name="Form2 - controlled components"
-        modalContent={'hello2'}
+        modalContent={<ControlledForm />}
       />
     </main>
   );
