@@ -2,8 +2,9 @@ import './controlledForm.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Countries } from '../Countries/Countries';
 
-interface FormData {
+export interface FormData {
   name: string;
   email: string;
   age: number;
@@ -74,6 +75,8 @@ export const ControlledForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setValue,
+    watch,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -121,11 +124,7 @@ export const ControlledForm = () => {
           <label>Female</label>
         </div>
         {errors.gender && <p className="error-text">{errors.gender.message}</p>}
-        <label>Country: </label>
-        <select autoComplete="on" {...register('country')}>
-          <option value="country1">Country1</option>
-          <option value="country2">Country2</option>
-        </select>
+        <Countries register={register} setValue={setValue} watch={watch} />
         {errors.country && (
           <p className="error-text">{errors.country.message}</p>
         )}
