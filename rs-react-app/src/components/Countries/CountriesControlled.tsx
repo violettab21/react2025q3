@@ -4,10 +4,9 @@ import type {
   UseFormWatch,
 } from 'react-hook-form';
 
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../store/store';
 import './countries.css';
 import { type FormData } from '../forms/validation';
+import { useCountries } from './useCountries';
 
 export const CountriesControlled = ({
   register,
@@ -18,30 +17,11 @@ export const CountriesControlled = ({
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }) => {
-  const [isListVisible, setIsListVisible] = useState(false);
+  const { isListVisible, setIsListVisible, countries } = useCountries();
   const watchCountry = watch('country');
-  const countries = useAppSelector((state) => state.countries);
   const filteredCountry = countries.filter((country) =>
     country.toLowerCase().includes(watchCountry?.toLowerCase())
   );
-
-  useEffect(() => {
-    const closeList = (e: Event) => {
-      const clickedElement = e.target;
-
-      if (clickedElement && clickedElement instanceof Element) {
-        if (
-          !clickedElement.classList.contains('country') &&
-          !clickedElement.classList.contains('country-container')
-        )
-          setIsListVisible(false);
-      }
-    };
-    document.addEventListener('click', closeList);
-    return () => {
-      document.removeEventListener('click', closeList);
-    };
-  }, [isListVisible]);
 
   return (
     <>
