@@ -8,8 +8,8 @@ export const UserCard = ({ user }: { user: User }) => {
       <p>Email: {user.email}</p>
       <p>Age: {user.age}</p>
       <p>Gender: {user.gender}</p>
-      <p>Image: </p>
       <p>Country: {user.country}</p>
+      <p>T&C: {user.country}</p>
     </div>
   );
 };

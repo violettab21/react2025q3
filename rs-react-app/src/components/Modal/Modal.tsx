@@ -12,8 +12,10 @@ export const Modal = ({
   return createPortal(
     <div className="modal-background">
       <div className="modal">
+        <button className="close" onClick={onClose}>
+          Close
+        </button>
         <div className="modal-content"> {children}</div>
-        <button onClick={onClose}>Close</button>
       </div>
     </div>,
     document.body

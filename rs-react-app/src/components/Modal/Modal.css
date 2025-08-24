@@ -17,4 +17,10 @@
   max-width: 900px;
   background-color: white;
   align-items: center;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 0;
 }
