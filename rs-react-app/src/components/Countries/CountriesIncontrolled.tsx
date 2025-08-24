@@ -1,28 +1,27 @@
-import type {
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormWatch,
-} from 'react-hook-form';
-import { type FormData } from '../ControlledForm/ControlledForm';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../store/store';
 import './countries.css';
 
-export const Countries = ({
-  register,
-  setValue,
-  watch,
+export const CountriesUncontrolled = ({
+  name,
+  inputRef,
 }: {
-  register: UseFormRegister<FormData>;
-  setValue: UseFormSetValue<FormData>;
-  watch: UseFormWatch<FormData>;
+  name: string;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) => {
   const [isListVisible, setIsListVisible] = useState(false);
-  const watchCountry = watch('country');
   const countries = useAppSelector((state) => state.countries);
-  const filteredCountry = countries.filter((country) =>
-    country.toLowerCase().includes(watchCountry?.toLowerCase())
-  );
+  const [filteredCountries, setFilteredCountries] = useState<string[]>([]);
+  const [country, setCountry] = useState('');
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCountry(e.target.value);
+  };
+
+  const handleCountrySelect = (country: string) => {
+    setCountry(country);
+    setIsListVisible(false);
+  };
 
   useEffect(() => {
     const closeList = (e: Event) => {
@@ -42,27 +41,38 @@ export const Countries = ({
     };
   }, [isListVisible]);
 
+  useEffect(() => {
+    const filteredCountry = countries.filter((el) =>
+      el.toLowerCase().includes(country.toLowerCase())
+    );
+    setFilteredCountries(filteredCountry);
+  }, [country, countries]);
+
   return (
     <>
       <label>Country: </label>
+
       <input
         className="country"
         onFocus={() => {
           setIsListVisible(true);
         }}
-        autoComplete="on"
-        {...register('country')}
+        autoComplete="off"
+        name={name}
+        ref={inputRef}
+        value={country}
+        onChange={onChange}
       />
+
       <>
         {isListVisible && (
           <div className="countries-container">
             <ul className="countries">
-              {(watchCountry ? filteredCountry : countries).map((country) => (
+              {(country ? filteredCountries : countries).map((country) => (
                 <li
                   key={country}
                   onClick={() => {
-                    setValue('country', country);
-                    setIsListVisible(false);
+                    handleCountrySelect(country);
                   }}
                 >
                   {country}

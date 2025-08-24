@@ -1,9 +1,8 @@
-import { useAppSelector } from '../../store/store';
+import type { User } from '../../store/usersSlice';
 import { UserCard } from '../User/User';
 import './users.css';
 
-export const Users = () => {
-  const users = useAppSelector((state) => state.users);
+export const Users = ({ users }: { users: User[] }) => {
   if (users.length === 0) {
     return (
       <div>

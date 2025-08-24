@@ -1,11 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { usersSlice, type User } from './usersSlice';
+import {
+  usersSliceControlled,
+  usersSliceUncontrolled,
+  type User,
+} from './usersSlice';
 import { countriesSlice } from './countries';
 
 export const createStore = () => {
   return configureStore({
-    reducer: { users: usersSlice.reducer, countries: countriesSlice.reducer },
+    reducer: {
+      usersControlled: usersSliceControlled.reducer,
+      usersUncontrolled: usersSliceUncontrolled.reducer,
+      countries: countriesSlice.reducer,
+    },
   });
 };
 
@@ -14,7 +22,8 @@ export const store = createStore();
 export type AppStore = ReturnType<typeof createStore>;
 export type AppDispatch = AppStore['dispatch'];
 export type RootState = {
-  users: User[];
+  usersControlled: User[];
+  usersUncontrolled: User[];
   countries: string[];
 };
 

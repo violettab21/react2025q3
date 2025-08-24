@@ -14,14 +14,25 @@ export interface User {
 
 const initialState: User[] = [];
 
-export const usersSlice = createSlice({
-  name: 'users',
+export const usersSliceControlled = createSlice({
+  name: 'usersControlled',
   initialState,
   reducers: {
-    addUser(state, action: PayloadAction<User>) {
+    addUserControlled(state, action: PayloadAction<User>) {
       state.push(action.payload);
     },
   },
 });
 
-export const { addUser } = usersSlice.actions;
+export const usersSliceUncontrolled = createSlice({
+  name: 'usersUncontrolled',
+  initialState,
+  reducers: {
+    addUserUncontrolled(state, action: PayloadAction<User>) {
+      state.push(action.payload);
+    },
+  },
+});
+
+export const { addUserControlled } = usersSliceControlled.actions;
+export const { addUserUncontrolled } = usersSliceUncontrolled.actions;

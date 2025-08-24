@@ -1,76 +1,12 @@
 import './controlledForm.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Countries } from '../Countries/Countries';
-import { useAppDispatch } from '../../store/store';
-import { addUser } from '../../store/usersSlice';
+import { CountriesControlled } from '../../Countries/CountriesControlled';
+import { useAppDispatch } from '../../../store/store';
 
-export interface FormData {
-  name: string;
-  email: string;
-  age: number;
-  password: string;
-  repeatPassword: string;
-  gender: string;
-  country: string;
-  image: FileList;
-  terms: boolean;
-}
-
-const schema = yup
-  .object({
-    name: yup
-      .string()
-      .required('Name is required')
-      .matches(/^[A-Z][a-z]*/, 'Name should start with capital letter')
-      .matches(/^[A-Z][a-z]*$/, 'Only letters are allowed'),
-    email: yup
-      .string()
-      .required('Email is required')
-      .matches(
-        /^[\w-.]+@[\w]+\.\w+$/,
-        'Email must correspond to email.example.com format'
-      ),
-    age: yup
-      .number()
-      .positive('Age should be positive number')
-      .integer('Age should be integer')
-      .required('Age is required'),
-    password: yup
-      .string()
-      .required('Password is required')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .matches(/[0-9]/, 'Password must contain at least one number')
-      .matches(/[\W|_]/, 'Password must contain at least one special character')
-      .min(10, 'Password must contain at least 10 characters'),
-    repeatPassword: yup
-      .string()
-      .required('Repeat Password')
-      .oneOf([yup.ref('password')], 'Passwords must match'),
-    gender: yup.string().required('Gender is required'),
-    country: yup.string().required('Country is required'),
-    image: yup
-      .mixed<FileList>()
-      .required('Image is required')
-      .test('format', 'Invalid Format, jpeg and png allowed', (value) => {
-        if (value && value[0]) {
-          const isValidFormat =
-            value &&
-            (value[0].type === 'image/png' || value[0].type === 'image/jpeg');
-          return isValidFormat;
-        } else return true;
-      })
-      .test('size', 'Invalid Size, max size is 5MB', (value) => {
-        if (value && value[0]) {
-          const isValidSize = value[0].size <= 5000000;
-          return isValidSize;
-        } else return true;
-      }),
-    terms: yup.boolean().required('Terms is required'),
-  })
-  .required();
+import { schema } from '../validation';
+import { type FormData } from '../validation';
+import { addUserControlled } from '../../../store/usersSlice';
 
 export const ControlledForm = ({ onClose }: { onClose: () => void }) => {
   const {
@@ -98,14 +34,15 @@ export const ControlledForm = ({ onClose }: { onClose: () => void }) => {
       repeatPassword,
       image,
     } = data;
+    onClose();
     const imageBlob = image[0];
     let transformedImage: string;
-    onClose();
+
     const reader = new FileReader();
     reader.onload = () => {
       transformedImage = reader.result as string;
       dispatch(
-        addUser({
+        addUserControlled({
           name: name,
           email: email,
           age: age,
@@ -159,7 +96,11 @@ export const ControlledForm = ({ onClose }: { onClose: () => void }) => {
           <label>Female</label>
         </div>
         {errors.gender && <p className="error-text">{errors.gender.message}</p>}
-        <Countries register={register} setValue={setValue} watch={watch} />
+        <CountriesControlled
+          register={register}
+          setValue={setValue}
+          watch={watch}
+        />
         {errors.country && (
           <p className="error-text">{errors.country.message}</p>
         )}
