@@ -41,8 +41,7 @@ export const UnconrolledForm = ({ onClose }: { onClose: () => void }) => {
           : '',
       country: countryRef.current ? countryRef.current.value : '',
       terms: termsRef.current ? termsRef.current.checked : false,
-      image:
-        imageRef.current && imageRef.current.files && imageRef.current.files,
+      image: imageRef.current && imageRef.current.files,
     };
 
     try {
@@ -89,50 +88,95 @@ export const UnconrolledForm = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className="form-container">
       <form className="form" ref={formRef} onSubmit={onSubmit}>
-        <label>Name: </label>
-        <input type="text" name="name" placeholder="Name" ref={nameRef} />
-        {errors.name && <p className="error-text">{errors.name}</p>}
-        <label>Age: </label>
-        <input type="number" name="age" placeholder="Age" ref={ageRef} />
-        {errors.age && <p className="error-text">{errors.age}</p>}
-        <label>Email: </label>
-        <input type="email" name="email" placeholder="Email" ref={emailRef} />
-        {errors.email && <p className="error-text">{errors.email}</p>}
-        <label>Password: </label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        {errors.password && <p className="error-text">{errors.password}</p>}
-        <label>Repeat Password: </label>
-        <input
-          type="password"
-          name="repeatPassword"
-          placeholder="Repeat Password"
-          ref={repeatPasswordRef}
-        />
-        {errors.repeatPassword && (
-          <p className="error-text">{errors.repeatPassword}</p>
-        )}
-        <div>
-          <p> Gender:</p>
-          <input type="radio" value="male" name="gender" ref={genderMaleRef} />
-          <label>Male</label>
-          <input
-            type="radio"
-            value="female"
-            name="gender"
-            ref={genderFemaleRef}
-          />
-          <label>Female</label>
-          {errors.gender && <p className="error-text">{errors.gender}</p>}
+        <div className="block-container">
+          <div className="form-block">
+            <label htmlFor="name">Name: </label>
+            <input
+              id="name"
+              className="input"
+              type="text"
+              name="name"
+              placeholder="Name"
+              ref={nameRef}
+            />
+            {errors.name && <p className="error-text">{errors.name}</p>}
+            <label htmlFor="age">Age: </label>
+            <input
+              id="age"
+              className="input"
+              type="number"
+              name="age"
+              placeholder="Age"
+              ref={ageRef}
+            />
+            {errors.age && <p className="error-text">{errors.age}</p>}
+            <CountriesUncontrolled name="country" inputRef={countryRef} />
+            <div>
+              <p> Gender:</p>
+              <input
+                id="male"
+                className="input-radio"
+                type="radio"
+                value="male"
+                name="gender"
+                ref={genderMaleRef}
+              />
+              <label htmlFor="male" className="label gender-label">
+                Male
+              </label>
+              <input
+                id="female"
+                className="input-radio"
+                type="radio"
+                value="female"
+                name="gender"
+                ref={genderFemaleRef}
+              />
+              <label htmlFor="female" className="label gender-label">
+                Female
+              </label>
+              {errors.gender && <p className="error-text">{errors.gender}</p>}
+            </div>
+            <label htmlFor="file">Choose an image </label>{' '}
+            <input id="file" type="file" name="image" ref={imageRef} />
+            {errors.image && <p className="error-text">{errors.image}</p>}
+          </div>
+
+          <div className="form-block">
+            <label htmlFor="email">Email: </label>
+            <input
+              id="email"
+              className="input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              ref={emailRef}
+            />
+            {errors.email && <p className="error-text">{errors.email}</p>}
+            <label htmlFor="password">Password: </label>
+            <input
+              id="password"
+              className="input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              ref={passwordRef}
+            />
+            {errors.password && <p className="error-text">{errors.password}</p>}
+            <label htmlFor="repeatPassword">Repeat Password: </label>
+            <input
+              id="repeatPassword"
+              className="input"
+              type="password"
+              name="repeatPassword"
+              placeholder="Repeat Password"
+              ref={repeatPasswordRef}
+            />
+            {errors.repeatPassword && (
+              <p className="error-text">{errors.repeatPassword}</p>
+            )}
+          </div>
         </div>
-        <CountriesUncontrolled name="country" inputRef={countryRef} />
-        <label>Choose an image </label>{' '}
-        <input type="file" name="image" ref={imageRef} />
-        {errors.image && <p className="error-text">{errors.image}</p>}
         <label>
           I accept Terms and Conditions agreement{' '}
           <input type="checkbox" name="terms" ref={termsRef} />

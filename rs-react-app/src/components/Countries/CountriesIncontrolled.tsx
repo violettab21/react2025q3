@@ -29,8 +29,8 @@ export const CountriesUncontrolled = ({
 
       if (clickedElement && clickedElement instanceof Element) {
         if (
-          clickedElement.className !== 'countries' &&
-          clickedElement.className !== 'country'
+          !clickedElement.classList.contains('country') &&
+          !clickedElement.classList.contains('country-container')
         )
           setIsListVisible(false);
       }
@@ -50,10 +50,11 @@ export const CountriesUncontrolled = ({
 
   return (
     <>
-      <label>Country: </label>
+      <label htmlFor="country">Country: </label>
 
       <input
-        className="country"
+        id="country"
+        className="country input"
         onFocus={() => {
           setIsListVisible(true);
         }}
