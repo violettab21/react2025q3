@@ -3,7 +3,7 @@ import './user.css';
 
 export const UserCard = ({ user }: { user: User }) => {
   return (
-    <div className="user">
+    <div className="user" data-testid="user-id-test">
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
       <p>Age: {user.age}</p>

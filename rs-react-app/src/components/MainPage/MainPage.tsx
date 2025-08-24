@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../store/store';
 import { ControlledForm } from '../forms/ControlledForm/ControlledForm';
-import { UnconrolledForm } from '../forms/UncontrolledForm/UncontrolledForm';
+import { UncontrolledForm } from '../forms/UncontrolledForm/UncontrolledForm';
 import { ModalButton } from '../ModalButton/ModalButton';
 import { Users } from '../Users/Users';
 import './mainPage.css';
@@ -24,7 +24,7 @@ export const MainPage = () => {
         <ModalButton
           name="Form2 - uncontrolled components"
           renderItem={(onClose: () => void) => (
-            <UnconrolledForm onClose={onClose} />
+            <UncontrolledForm onClose={onClose} />
           )}
         />
         <Users users={usersUncontrolled} />

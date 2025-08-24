@@ -31,6 +31,7 @@ export const CountriesUncontrolled = ({
         ref={inputRef}
         value={country}
         onChange={onChange}
+        placeholder="Country"
       />
 
       <>

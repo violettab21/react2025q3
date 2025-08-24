@@ -24,10 +24,11 @@ export const schema = yup
       .required('Email is required')
       .matches(
         /^[\w-.]+@[\w]+\.\w+$/,
-        'Email must correspond to email.example.com format'
+        'Email must correspond to email@example.com format'
       ),
     age: yup
       .number()
+      .typeError('Age must be a number')
       .required('Age is required')
       .positive('Age should be positive number')
       .integer('Age should be integer'),

@@ -2,7 +2,7 @@ import { CountriesUncontrolled } from '../../Countries/CountriesUncontrolled';
 import '../form.css';
 import { useUncontrolledForm } from './useUncontrolledForm';
 
-export const UnconrolledForm = ({ onClose }: { onClose: () => void }) => {
+export const UncontrolledForm = ({ onClose }: { onClose: () => void }) => {
   const {
     formRef,
     nameRef,
@@ -45,6 +45,7 @@ export const UnconrolledForm = ({ onClose }: { onClose: () => void }) => {
             />
             {errors.age && <p className="error-text">{errors.age}</p>}
             <CountriesUncontrolled name="country" inputRef={countryRef} />
+            {errors.country && <p className="error-text">{errors.country}</p>}
             <div>
               <p> Gender:</p>
               <input
@@ -81,7 +82,7 @@ export const UnconrolledForm = ({ onClose }: { onClose: () => void }) => {
             <input
               id="email"
               className="input"
-              type="email"
+              type="text"
               name="email"
               placeholder="Email"
               ref={emailRef}
