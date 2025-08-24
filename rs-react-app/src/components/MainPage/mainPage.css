@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 80%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
