@@ -6,6 +6,7 @@ export const Modal = ({
   children,
 }: {
   onClose: () => void;
+
   children: React.ReactNode;
 }) => {
   return createPortal(
