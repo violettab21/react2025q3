@@ -8,7 +8,7 @@ export interface User {
   repeatPassword: string;
   gender: string;
   country: string;
-  image: FileList;
+  image: string;
   terms: boolean;
 }
 

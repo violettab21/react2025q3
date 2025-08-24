@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Countries } from '../Countries/Countries';
+import { useAppDispatch } from '../../store/store';
+import { addUser } from '../../store/usersSlice';
 
 export interface FormData {
   name: string;
@@ -62,7 +64,7 @@ const schema = yup
       })
       .test('size', 'Invalid Size, max size is 5MB', (value) => {
         if (value && value[0]) {
-          const isValidSize = value[0].size <= 5000;
+          const isValidSize = value[0].size <= 5000000;
           return isValidSize;
         } else return true;
       }),
@@ -70,7 +72,7 @@ const schema = yup
   })
   .required();
 
-export const ControlledForm = () => {
+export const ControlledForm = ({ onClose }: { onClose: () => void }) => {
   const {
     register,
     handleSubmit,
@@ -81,9 +83,42 @@ export const ControlledForm = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormData) => {
     console.log(data);
+    const {
+      name,
+      email,
+      age,
+      terms,
+      gender,
+      country,
+      password,
+      repeatPassword,
+      image,
+    } = data;
+    const imageBlob = image[0];
+    let transformedImage: string;
+    onClose();
+    const reader = new FileReader();
+    reader.onload = () => {
+      transformedImage = reader.result as string;
+      dispatch(
+        addUser({
+          name: name,
+          email: email,
+          age: age,
+          terms: terms,
+          gender: gender,
+          password: password,
+          country: country,
+          repeatPassword: repeatPassword,
+          image: transformedImage,
+        })
+      );
+    };
+    reader.readAsDataURL(imageBlob);
   };
 
   return (

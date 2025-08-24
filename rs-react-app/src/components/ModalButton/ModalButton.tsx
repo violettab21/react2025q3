@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
+import React from 'react';
 
 export const ModalButton = ({
   name,
-  modalContent,
+  renderItem,
 }: {
   name: string;
-  modalContent: React.ReactNode;
+  renderItem: (f: () => void) => React.ReactNode;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onClose = () => {
@@ -21,7 +22,7 @@ export const ModalButton = ({
       >
         {name}
       </button>
-      {isModalOpen && <Modal onClose={onClose}>{modalContent}</Modal>}
+      {isModalOpen && <Modal onClose={onClose}>{renderItem(onClose)}</Modal>}
     </>
   );
 };
