@@ -9,7 +9,7 @@ export const UserCard = ({ user }: { user: User }) => {
       <p>Age: {user.age}</p>
       <p>Gender: {user.gender}</p>
       <p>Country: {user.country}</p>
-      <p>T&C: {user.country}</p>
+      <p>T&C: {user.terms ? 'confirmed' : 'not confirmed'}</p>
     </div>
   );
 };

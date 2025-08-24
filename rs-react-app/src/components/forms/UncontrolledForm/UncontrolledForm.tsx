@@ -46,7 +46,7 @@ export const UncontrolledForm = ({ onClose }: { onClose: () => void }) => {
             {errors.age && <p className="error-text">{errors.age}</p>}
             <CountriesUncontrolled name="country" inputRef={countryRef} />
             {errors.country && <p className="error-text">{errors.country}</p>}
-            <div>
+            <div className="gender">
               <p> Gender:</p>
               <input
                 id="male"
@@ -73,7 +73,13 @@ export const UncontrolledForm = ({ onClose }: { onClose: () => void }) => {
               {errors.gender && <p className="error-text">{errors.gender}</p>}
             </div>
             <label htmlFor="file">Choose an image </label>{' '}
-            <input id="file" type="file" name="image" ref={imageRef} />
+            <input
+              id="file"
+              type="file"
+              name="image"
+              ref={imageRef}
+              accept="image/png, image/jpeg"
+            />
             {errors.image && <p className="error-text">{errors.image}</p>}
           </div>
 

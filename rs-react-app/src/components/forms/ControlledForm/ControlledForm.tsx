@@ -37,7 +37,7 @@ export const ControlledForm = ({ onClose }: { onClose: () => void }) => {
             {errors.country && (
               <p className="error-text">{errors.country.message}</p>
             )}
-            <div>
+            <div className="gender">
               <p> Gender:</p>
               <input
                 id="male"
@@ -64,7 +64,12 @@ export const ControlledForm = ({ onClose }: { onClose: () => void }) => {
               <p className="error-text">{errors.gender.message}</p>
             )}
             <label htmlFor="file">Choose an image</label>{' '}
-            <input id="file" type="file" {...register('image')} />
+            <input
+              id="file"
+              type="file"
+              accept="image/png, image/jpeg"
+              {...register('image')}
+            />
             {errors.image && (
               <p className="error-text">{errors.image.message}</p>
             )}

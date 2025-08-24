@@ -29,8 +29,12 @@
 .form-block {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+
   width: 50%;
+}
+
+label {
+  margin-top: 0.5rem;
 }
 
 .input {
@@ -46,4 +50,8 @@
 
 .gender-label {
   margin-right: 0.3rem;
+}
+
+.gender {
+  margin-top: 0.5rem;
 }

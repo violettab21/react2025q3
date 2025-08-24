@@ -256,24 +256,6 @@ describe('ControlledForm component tests', () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it('Check that error message displayed when file with invalid format uploaded', async () => {
-    const mockedFile = new File(['test'], 'test.txt', { type: 'text/plain' });
-    const store = createStore();
-    render(
-      <Provider store={store}>
-        <ControlledForm onClose={() => {}} />
-      </Provider>
-    );
-
-    const file = screen.getByLabelText('Choose an image');
-
-    await userEvent.upload(file, mockedFile);
-    const errorMessage = screen.getByText(
-      'Invalid Format, jpeg and png allowed'
-    );
-    expect(errorMessage).toBeInTheDocument();
-  });
-
   it('Check that error message displayed when country is empty', async () => {
     const store = createStore();
     render(

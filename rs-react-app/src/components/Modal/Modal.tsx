@@ -10,7 +10,7 @@ export const Modal = ({
   children: React.ReactNode;
 }) => {
   return createPortal(
-    <div className="modal-background">
+    <div className="modal-background" data-testid="modal">
       <div className="modal">
         <button className="close" onClick={onClose}>
           Close
