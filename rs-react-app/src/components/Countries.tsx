@@ -5,6 +5,7 @@ import { CountryRow } from './CountryRow/CountryRow';
 import './countries.css';
 import { ColumnChooser } from './ColumnChooser/ColumnChooser';
 import { YearSelector } from './YearSelector/YearSelector';
+import { Search } from './Search/Search';
 
 const fetch = getCountriesData();
 
@@ -12,6 +13,10 @@ const Countries = () => {
   const countriesData = fetch.read();
   const [selectItems, setSelectedItems] = useState<string[]>([]);
   const [isHighlighted, setIsHighlighted] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredCountries, setFilteredCountries] = useState(
+    Object.keys(countriesData)
+  );
 
   const getYears = () => {
     const countries = Object.keys(countriesData);
@@ -38,9 +43,20 @@ const Countries = () => {
   };
   const latestYear = getYears().at(-1);
   const [selectedYear, setSelectedYear] = useState<number>(latestYear || 2023);
-
+  const onSearch = (currentSearchValue: string) => {
+    setFilteredCountries(
+      Object.keys(countriesData).filter((country) =>
+        country.toLowerCase().includes(currentSearchValue.toLowerCase())
+      )
+    );
+  };
   return (
     <>
+      <Search
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        onSearch={onSearch}
+      />
       <ColumnChooser
         selectedItems={selectItems}
         setSelectedItems={setSelectedItems}
@@ -66,7 +82,7 @@ const Countries = () => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(countriesData).map((countryName) => (
+          {filteredCountries.map((countryName) => (
             <CountryRow
               isHighlighted={isHighlighted}
               key={countryName}
