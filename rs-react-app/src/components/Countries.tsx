@@ -72,7 +72,6 @@ const Countries = () => {
   const latestYear = getYears().at(-1);
   const [selectedYear, setSelectedYear] = useState<number>(latestYear || 2023);
   const transformedCountriesData = prepareDataForSelectedYear(selectedYear);
-  console.log(transformedCountriesData);
   const [filteredCountries, setFilteredCountries] = useState(
     transformedCountriesData
   );
@@ -102,7 +101,6 @@ const Countries = () => {
           if (a.country > b.country) return 1;
           return 0;
         });
-        console.log(sortedCountries);
         setFilteredCountries(sortedCountries);
         break;
       }
@@ -113,7 +111,6 @@ const Countries = () => {
           if (a.country < b.country) return 1;
           return 0;
         });
-        console.log(sortedCountries);
         setFilteredCountries(sortedCountries);
         break;
       }
