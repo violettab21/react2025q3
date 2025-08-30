@@ -1,30 +1,28 @@
-import { useState } from 'react';
 import type { Country } from '../types';
-import CountryTable from './CountryTable';
 
 interface CountryRowProps {
   country: Country;
   countryName: string;
+  selectedItems: string[];
 }
 
-export const CountryRow = ({ country, countryName }: CountryRowProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+export const CountryRow = ({
+  country,
+  countryName,
+  selectedItems,
+}: CountryRowProps) => {
+  const object = country.data.at(-1);
   return (
-    <>
-      <div>{countryName}</div>
-      <div>{country.iso_code}</div>
-      <div>{country.data.at(-1)?.population}</div>
-      <div>
-        <button
-          onClick={() => {
-            setIsExpanded(!isExpanded);
-          }}
-        >
-          {isExpanded ? 'Collapse' : 'Expand'}
-        </button>
-      </div>
-      {isExpanded ? <CountryTable country={country} /> : null}
-    </>
+    <tr>
+      <td>{countryName}</td>
+      <td>{country.iso_code}</td>
+      <td>{country.data.at(-1)?.population}</td>
+      <td>{country.data.at(-1)?.year}</td>
+      <td>{country.data.at(-1)?.cement_co2}</td>
+      <td>{country.data.at(-1)?.cement_co2_per_capita}</td>
+      {selectedItems.map((value: string, i) => (
+        <td key={`${value}${i}${countryName}`}>{object && object[value]}</td>
+      ))}
+    </tr>
   );
 };

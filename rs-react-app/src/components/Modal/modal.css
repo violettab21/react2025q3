@@ -1,0 +1,26 @@
+.modal-background {
+  position: absolute;
+  display: flex;
+  z-index: 1000;
+  background-color: rgba(128, 128, 128, 0.548);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  z-index: 1000;
+  max-width: 900px;
+  background-color: white;
+  align-items: center;
+  position: relative;
+  padding: 2rem;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+}
