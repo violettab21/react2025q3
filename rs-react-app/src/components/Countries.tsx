@@ -6,6 +6,7 @@ import './countries.css';
 import { ColumnChooser } from './ColumnChooser/ColumnChooser';
 import { YearSelector } from './YearSelector/YearSelector';
 import { Search } from './Search/Search';
+import { SortSelector } from './SortSelector/SortSelector';
 
 const fetch = getCountriesData();
 
@@ -17,6 +18,7 @@ const Countries = () => {
   const [filteredCountries, setFilteredCountries] = useState(
     Object.keys(countriesData)
   );
+  const [selectedSort, setSelectedSort] = useState<string>('name_asc');
 
   const getYears = () => {
     const countries = Object.keys(countriesData);
@@ -43,6 +45,7 @@ const Countries = () => {
   };
   const latestYear = getYears().at(-1);
   const [selectedYear, setSelectedYear] = useState<number>(latestYear || 2023);
+
   const onSearch = (currentSearchValue: string) => {
     setFilteredCountries(
       Object.keys(countriesData).filter((country) =>
@@ -50,6 +53,76 @@ const Countries = () => {
       )
     );
   };
+
+  const onSort = (sort: string) => {
+    switch (sort) {
+      case 'name_asc': {
+        const countries = filteredCountries.slice(0);
+        setFilteredCountries(countries.sort());
+        break;
+      }
+      case 'name_desc': {
+        const countries = filteredCountries.slice(0);
+        setFilteredCountries(countries.sort().reverse());
+        break;
+      }
+      case 'population_asc': {
+        const countries = filteredCountries.slice(0);
+        const sortedCountries = countries
+          .map((country) => {
+            const yearObject = countriesData[country].data.find(
+              (yearData) => yearData.year === selectedYear
+            );
+            return {
+              countryName: country,
+              yearObject: yearObject,
+            };
+          })
+          .sort((a, b) => {
+            if (a && b && a.yearObject && b.yearObject) {
+              if (a.yearObject.population && b.yearObject.population)
+                return a.yearObject.population - b.yearObject.population;
+              else {
+                if (!a.yearObject.population) return -1;
+                if (!b.yearObject.population) return 1;
+              }
+            }
+            return -1;
+          })
+          .map((modifiedElement) => modifiedElement.countryName);
+        setFilteredCountries(sortedCountries);
+        break;
+      }
+      case 'population_desc': {
+        const countries = filteredCountries.slice(0);
+        const sortedCountries = countries
+          .map((country) => {
+            const yearObject = countriesData[country].data.find(
+              (yearData) => yearData.year === selectedYear
+            );
+            return {
+              countryName: country,
+              yearObject: yearObject,
+            };
+          })
+          .sort((a, b) => {
+            if (a && b && a.yearObject && b.yearObject) {
+              if (a.yearObject.population && b.yearObject.population)
+                return b.yearObject.population - a.yearObject.population;
+              else {
+                if (!a.yearObject.population) return 1;
+                if (!b.yearObject.population) return -1;
+              }
+            }
+            return -1;
+          })
+          .map((modifiedElement) => modifiedElement.countryName);
+        setFilteredCountries(sortedCountries);
+        break;
+      }
+    }
+  };
+
   return (
     <>
       <Search
@@ -66,6 +139,11 @@ const Countries = () => {
         selectedYear={selectedYear}
         setSelectedYear={setSelectedYear}
         setIsHighlighted={setIsHighlighted}
+      />
+      <SortSelector
+        selectedSort={selectedSort}
+        setSelectedSort={setSelectedSort}
+        onSort={onSort}
       />
       <table>
         <thead>
