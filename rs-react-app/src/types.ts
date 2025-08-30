@@ -10,3 +10,10 @@ export interface Data {
 export interface CountriesData {
   [index: string]: Country;
 }
+
+export interface CustomCountry {
+  country: string;
+  year: number | null;
+  iso_code: string | null;
+  countryYearData: { [index: string]: number | null };
+}

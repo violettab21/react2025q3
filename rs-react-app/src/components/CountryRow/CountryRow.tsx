@@ -1,10 +1,9 @@
-import type { Country } from '../../types';
+import type { CustomCountry } from '../../types';
 import './countryRow.css';
 import { CellHighlighted } from '../CellHighligted/CellHighlighted';
 
 interface CountryRowProps {
-  country: Country;
-  countryName: string;
+  country: CustomCountry;
   selectedItems: string[];
   selectedYear: number;
   isHighlighted: boolean;
@@ -12,40 +11,34 @@ interface CountryRowProps {
 
 export const CountryRow = ({
   country,
-  countryName,
   selectedItems,
-  selectedYear,
   isHighlighted,
 }: CountryRowProps) => {
-  const yearData = country.data.find(
-    (element) => element.year === selectedYear
-  );
-
   return (
     <tr>
-      <td>{countryName}</td>
+      <td>{country.country}</td>
       <td>{country.iso_code ? country.iso_code : 'N/A'}</td>
       <CellHighlighted
-        newValue={yearData?.population || 'N/A'}
+        newValue={country.countryYearData?.population || 'N/A'}
         isHighlighted={isHighlighted}
       />
       <CellHighlighted
-        newValue={yearData?.year || 'N/A'}
+        newValue={country?.year || 'N/A'}
         isHighlighted={isHighlighted}
       />
       <CellHighlighted
-        newValue={yearData?.cement_co2 || 'N/A'}
+        newValue={country.countryYearData.cement_co2 || 'N/A'}
         isHighlighted={isHighlighted}
       />
       <CellHighlighted
-        newValue={yearData?.cement_co2_per_capita || 'N/A'}
+        newValue={country.countryYearData?.cement_co2_per_capita || 'N/A'}
         isHighlighted={isHighlighted}
       />
       {selectedItems.map((value: string, i) => (
         <CellHighlighted
-          newValue={(yearData && yearData[value]) || 'N/A'}
+          newValue={country.countryYearData[value] || 'N/A'}
           isHighlighted={isHighlighted}
-          key={`${value}${i}${countryName}`}
+          key={`${value}${i}${country.country}`}
         />
       ))}
     </tr>

@@ -1,27 +1,17 @@
 interface YearSelector {
   years: number[];
   selectedYear: number;
-  setSelectedYear: React.Dispatch<React.SetStateAction<number>>;
-  setIsHighlighted: React.Dispatch<React.SetStateAction<boolean>>;
+  onYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const YearSelector = ({
   years,
   selectedYear,
-  setSelectedYear,
-  setIsHighlighted,
+  onYearChange,
 }: YearSelector) => {
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedYear(Number(e.target.value));
-    setIsHighlighted(true);
-    setTimeout(() => {
-      setIsHighlighted(false);
-    }, 1000);
-  };
-
   return (
     <>
-      <select onChange={onChange}>
+      <select onChange={onYearChange}>
         {years.map((year) => (
           <option key={year} value={year} selected={selectedYear === year}>
             {year}
