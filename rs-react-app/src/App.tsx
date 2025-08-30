@@ -1,16 +1,15 @@
-import { useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import './App.css';
+//import Countries from './components/Countries';
+const Countries = lazy(() => import('./components/Countries'));
 
 function App() {
-  useEffect(() => {
-    fetch(
-      'https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json'
-    );
-  }, []);
-
   return (
     <>
       <p>Performance task</p>
+      <Suspense fallback={<p>Loading</p>}>
+        <Countries />
+      </Suspense>
     </>
   );
 }
