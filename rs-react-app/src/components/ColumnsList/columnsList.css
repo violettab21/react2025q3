@@ -1,4 +1,4 @@
-.columnsList {
-  display: flex;
-  flex-direction: column;
+.columnLabel {
+  margin-left: 0.5rem;
+  text-transform: capitalize;
 }

@@ -8,7 +8,7 @@ export const Search = ({
   onSearch: (currentSearchValue: string) => void;
 }) => {
   return (
-    <>
+    <div>
       <input
         placeholder="Search"
         value={searchValue}
@@ -17,6 +17,6 @@ export const Search = ({
           onSearch(e.target.value);
         }}
       />
-    </>
+    </div>
   );
 };

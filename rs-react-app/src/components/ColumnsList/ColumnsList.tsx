@@ -1,4 +1,7 @@
 import './columnsList.css';
+import { Checkbox } from './parts/Checkbox';
+
+const columns = ['methane', 'oil_co2', 'temperature_change_from_co2'];
 
 export const ColumnsList = ({
   selectedItems,
@@ -24,41 +27,14 @@ export const ColumnsList = ({
 
   return (
     <div className="columnsList">
-      <label htmlFor="methane">
-        <input
-          className="columnSelect"
-          type="checkbox"
-          value="methane"
-          id="methane"
-          checked={isSelected('methane')}
+      {columns.map((column) => (
+        <Checkbox
+          key={column}
+          value={column}
           onChange={onChange}
+          isSelected={isSelected(column)}
         />
-        Methane
-      </label>
-
-      <label htmlFor="oil_co2">
-        <input
-          className="columnSelect"
-          type="checkbox"
-          value="oil_co2"
-          id="oil_co2"
-          checked={isSelected('oil_co2')}
-          onChange={onChange}
-        />
-        oil_co2
-      </label>
-
-      <label htmlFor="temperature_change_from_co2">
-        <input
-          className="columnSelect"
-          type="checkbox"
-          value="temperature_change_from_co2"
-          id="temperature_change_from_co2"
-          checked={isSelected('temperature_change_from_co2')}
-          onChange={onChange}
-        />
-        temperature_change_from_co2
-      </label>
+      ))}
     </div>
   );
 };

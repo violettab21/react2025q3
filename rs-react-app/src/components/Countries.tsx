@@ -160,51 +160,56 @@ const Countries = () => {
 
   return (
     <>
-      <Search
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        onSearch={onSearch}
-      />
-      <ColumnChooser
-        selectedItems={selectItems}
-        setSelectedItems={setSelectedItems}
-      />
-      <YearSelector
-        years={getYears()}
-        selectedYear={selectedYear}
-        onYearChange={onYearChange}
-      />
-      <SortSelector
-        selectedSort={selectedSort}
-        setSelectedSort={setSelectedSort}
-        onSort={onSort}
-      />
-      <table>
-        <thead>
-          <tr>
-            <th>Country</th>
-            <th>Iso Code</th>
-            <th>Population</th>
-            <th>Year</th>
-            <th>co2</th>
-            <th>co2_per_capita</th>
-            {selectItems.map((value, i) => (
-              <th key={`${i}${value}`}>{value}</th>
+      <div className="menu">
+        <Search
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          onSearch={onSearch}
+        />
+
+        <YearSelector
+          years={getYears()}
+          selectedYear={selectedYear}
+          onYearChange={onYearChange}
+        />
+        <SortSelector
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+          onSort={onSort}
+        />
+        <ColumnChooser
+          selectedItems={selectItems}
+          setSelectedItems={setSelectedItems}
+        />
+      </div>
+      <div className="countriesContainer">
+        <table className="countriesTable">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Iso Code</th>
+              <th>Population</th>
+              <th>Year</th>
+              <th>co2</th>
+              <th>co2_per_capita</th>
+              {selectItems.map((value, i) => (
+                <th key={`${i}${value}`}>{value}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filteredCountries.map((country) => (
+              <CountryRow
+                isHighlighted={isHighlighted}
+                key={country.country}
+                country={country}
+                selectedItems={selectItems}
+                selectedYear={selectedYear}
+              />
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredCountries.map((country) => (
-            <CountryRow
-              isHighlighted={isHighlighted}
-              key={country.country}
-              country={country}
-              selectedItems={selectItems}
-              selectedYear={selectedYear}
-            />
-          ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>{' '}
+      </div>
     </>
   );
 };

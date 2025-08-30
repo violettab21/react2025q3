@@ -10,14 +10,15 @@ export const YearSelector = ({
   onYearChange,
 }: YearSelector) => {
   return (
-    <>
-      <select onChange={onYearChange}>
+    <div>
+      <label htmlFor="year">Year</label>
+      <select id="year" onChange={onYearChange}>
         {years.map((year) => (
           <option key={year} value={year} selected={selectedYear === year}>
             {year}
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 };

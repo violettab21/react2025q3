@@ -1,5 +1,5 @@
 .modal-background {
-  position: absolute;
+  position: fixed;
   display: flex;
   z-index: 1000;
   background-color: rgba(128, 128, 128, 0.548);
@@ -9,6 +9,7 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .modal {
@@ -18,9 +19,11 @@
   align-items: center;
   position: relative;
   padding: 2rem;
+  border-radius: 6px;
 }
 
 .close {
   position: absolute;
-  right: 0;
+  right: 10px;
+  top: 10px;
 }

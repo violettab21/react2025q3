@@ -1,12 +1,47 @@
-.countries-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+.countriesContainer {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
 }
 
-.countryTable {
-  grid-column: 1 / -1;
-  max-height: 400px;
-  overflow-y: scroll;
-  margin: auto;
+.countriesTable {
+  /* width: 100%;*/
+  overflow-x: scroll;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid black;
+}
+
+thead {
+  background-color: #577055;
+}
+tbody {
+  background-color: #ddf5dc;
+}
+
+th,
+td {
+  padding: 0.5rem;
+}
+
+label {
+  margin-right: 0.5rem;
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+input,
+select {
+  padding: 0.3rem;
 }

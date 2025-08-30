@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { ColumnsList } from '../ColumnsList/ColumnsList';
 import { Modal } from '../Modal/Modal';
+import './columnChooser.css';
 
 export const ColumnChooser = ({
   selectedItems,
@@ -13,6 +14,7 @@ export const ColumnChooser = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onClose = () => {
     setIsModalOpen(false);
+    document.body.style.overflow = 'unset';
   };
 
   useEffect(() => {
@@ -39,8 +41,10 @@ export const ColumnChooser = ({
   return (
     <>
       <button
+        className="columnChooser"
         onClick={() => {
           setIsModalOpen(true);
+          document.body.style.overflow = 'hidden';
         }}
       >
         Column Chooser

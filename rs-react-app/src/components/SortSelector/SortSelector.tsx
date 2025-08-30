@@ -16,8 +16,9 @@ export const SortSelector = ({
   };
 
   return (
-    <>
-      <select onChange={onChange}>
+    <div>
+      <label htmlFor="sort">Sort by</label>
+      <select id="sort" onChange={onChange}>
         <option value="name_asc" selected={selectedSort === 'name_asc'}>
           Name Asc
         </option>
@@ -37,6 +38,6 @@ export const SortSelector = ({
           Population Desc
         </option>
       </select>
-    </>
+    </div>
   );
 };
