@@ -1,13 +1,13 @@
 import { lazy, Suspense } from 'react';
 import './App.css';
-//import Countries from './components/Countries';
+import { Loader } from './components/Loader/Loader';
 const Countries = lazy(() => import('./components/Countries'));
 
 function App() {
   return (
     <>
       <p>Performance task</p>
-      <Suspense fallback={<p>Loading</p>}>
+      <Suspense fallback={<Loader />}>
         <Countries />
       </Suspense>
     </>

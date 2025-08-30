@@ -6,7 +6,7 @@
   border: 2px solid rgb(121, 121, 139);
   border-top-color: white;
   animation: loading 1s linear infinite;
-  margin: 5rem;
+  margin: 1rem;
 }
 
 @keyframes loading {
