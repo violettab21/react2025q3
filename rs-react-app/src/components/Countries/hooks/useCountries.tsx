@@ -68,7 +68,7 @@ export const useCountries = (countriesData: CountriesData) => {
     return years;
   }, [countries, countriesData]);
 
-  const onSort = (sort: string, array: CustomCountry[]) => {
+  const onSort = useCallback((sort: string, array: CustomCountry[]) => {
     let sortedArray: CustomCountry[] = [];
     switch (sort) {
       case 'name_asc': {
@@ -130,7 +130,7 @@ export const useCountries = (countriesData: CountriesData) => {
       }
     }
     return sortedArray;
-  };
+  }, []);
 
   const years = useMemo(() => getYears(), [getYears]);
   const latestYear = years.at(-1);
