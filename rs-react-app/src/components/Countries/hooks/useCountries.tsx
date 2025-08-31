@@ -32,12 +32,12 @@ export const useCountries = (countriesData: CountriesData) => {
           countryYearData: {
             population: yearObject ? yearObject.population : null,
             co2: yearObject ? yearObject.co2 : null,
-            co2_per_capita: yearObject ? yearObject.co2 : null,
+            co2_per_capita: yearObject ? yearObject.co2_per_capita : null,
             ...selectedColumnsData,
           },
         };
       });
-      console.log(array);
+
       return array;
     },
     [countries, countriesData]
@@ -177,7 +177,7 @@ export const useCountries = (countriesData: CountriesData) => {
       data = onSort(selectedSort, data);
     }
     return data;
-  }, [searchValue, selectedSort, transformedCountriesData]);
+  }, [searchValue, selectedSort, transformedCountriesData, onSort]);
 
   const onYearChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {

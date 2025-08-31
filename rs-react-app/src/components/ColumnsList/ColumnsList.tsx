@@ -2,8 +2,6 @@ import { useCallback } from 'react';
 import './columnsList.css';
 import { Checkbox } from './parts/Checkbox';
 
-/*const columns = ['methane', 'oil_co2', 'temperature_change_from_co2'];*/
-
 export const ColumnsList = ({
   selectedItems,
   setSelectedItems,
@@ -18,17 +16,20 @@ export const ColumnsList = ({
     [selectedItems]
   );
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const modifiedValue = e.target.value;
-    if (e.target?.checked) {
-      setSelectedItems([...selectedItems, modifiedValue]);
-    } else {
-      const array = selectedItems.slice(0);
-      const index = array.indexOf(modifiedValue);
-      array.splice(index, 1);
-      setSelectedItems(array);
-    }
-  };
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const modifiedValue = e.target.value;
+      if (e.target?.checked) {
+        setSelectedItems([...selectedItems, modifiedValue]);
+      } else {
+        const array = selectedItems.slice(0);
+        const index = array.indexOf(modifiedValue);
+        array.splice(index, 1);
+        setSelectedItems(array);
+      }
+    },
+    [selectedItems, setSelectedItems]
+  );
 
   return (
     <div className="columnsList">

@@ -25,7 +25,7 @@ export const CountryRow = memo(function CountryRow({
           key={column}
           newValue={
             typeof country.countryYearData[column] === 'number'
-              ? country.countryYearData[column]
+              ? country.countryYearData[column].toFixed(2)
               : 'N/A'
           }
           isHighlighted={isHighlighted}
@@ -34,24 +34,3 @@ export const CountryRow = memo(function CountryRow({
     </tr>
   );
 });
-
-/*<CellHighlighted
-          newValue={country.countryYearData?.population || 'N/A'}
-          isHighlighted={isHighlighted}
-        />
-
-        <CellHighlighted
-          newValue={country.countryYearData.cement_co2 || 'N/A'}
-          isHighlighted={isHighlighted}
-        />
-        <CellHighlighted
-          newValue={country.countryYearData?.cement_co2_per_capita || 'N/A'}
-          isHighlighted={isHighlighted}
-        />
-        {selectedColumns.map((value: string, i) => (
-          <CellHighlighted
-            newValue={country.countryYearData[value] || 'N/A'}
-            isHighlighted={isHighlighted}
-            key={`${value}${i}${country.country}`}
-          />
-        ))}*/

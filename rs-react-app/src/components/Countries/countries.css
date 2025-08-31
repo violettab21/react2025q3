@@ -1,15 +1,21 @@
-.countriesContainer {
-  width: 100%;
-
-  max-height: 700px;
+.main {
   display: flex;
-  overflow-y: scroll;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.countriesContainer {
+  display: flex;
+  justify-content: start;
+  width: 60%;
   overflow-x: scroll;
 }
 
 .countriesTable {
   border: 1px solid black;
   border-collapse: collapse;
+  width: 100%;
 }
 
 th,

@@ -28,7 +28,7 @@ const Countries = () => {
   } = useCountries(countriesData);
 
   return (
-    <>
+    <main className="main">
       <div className="menu">
         <Search searchValue={searchValue} setSearchValue={setSearchValue} />
 
@@ -73,7 +73,7 @@ const Countries = () => {
           </tbody>
         </table>
       </div>
-    </>
+    </main>
   );
 };
 
