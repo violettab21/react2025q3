@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react';
 
+interface CellHighlightedProps {
+  newValue: number | string;
+  isHighlighted: boolean;
+}
+
 export const CellHighlighted = ({
   newValue,
   isHighlighted,
-}: {
-  newValue: number | string;
-  isHighlighted: boolean;
-}) => {
+}: CellHighlightedProps) => {
   const ref = useRef<string | number>(null);
   useEffect(() => {
     ref.current = newValue;

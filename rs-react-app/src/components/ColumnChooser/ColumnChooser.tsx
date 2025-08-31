@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { ColumnsList } from '../ColumnsList/ColumnsList';
 import { Modal } from '../Modal/Modal';
 import './columnChooser.css';
 
-export const ColumnChooser = ({
-  selectedItems,
-  setSelectedItems,
-}: {
-  selectedItems: string[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
-}) => {
+interface ColumnChooserProps {
+  selectedColumns: string[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<string[]>>;
+  columns: Set<string>;
+}
+
+export const ColumnChooser = memo(function ColumnChooser({
+  selectedColumns,
+  setSelectedColumns,
+  columns,
+}: ColumnChooserProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onClose = () => {
     setIsModalOpen(false);
@@ -22,13 +26,13 @@ export const ColumnChooser = ({
       const clickedElement = e.target;
       if (clickedElement instanceof HTMLElement) {
         if (clickedElement.classList.contains('modal-background')) {
-          setIsModalOpen(false);
+          onClose();
         }
       }
     }
     function handleEscClick(e: KeyboardEvent) {
       if (e.code === 'Escape') {
-        setIsModalOpen(false);
+        onClose();
       }
     }
     document.addEventListener('click', handleOutsideClick);
@@ -53,11 +57,12 @@ export const ColumnChooser = ({
         <Modal onClose={onClose}>
           <p>Select columns</p>
           <ColumnsList
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
+            columns={columns}
+            selectedItems={selectedColumns}
+            setSelectedItems={setSelectedColumns}
           />
         </Modal>
       )}
     </>
   );
-};
+});

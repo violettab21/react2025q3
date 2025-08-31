@@ -20,10 +20,15 @@
   position: relative;
   padding: 2rem;
   border-radius: 6px;
+  height: 500px;
 }
 
 .close {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+
+.modal-content {
+  height: 80%;
 }

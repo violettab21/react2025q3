@@ -2,3 +2,8 @@
   margin-left: 0.5rem;
   text-transform: capitalize;
 }
+
+.columnsList {
+  height: 100%;
+  overflow-y: scroll;
+}

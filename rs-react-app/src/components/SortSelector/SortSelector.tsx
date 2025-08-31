@@ -1,19 +1,20 @@
+import { memo, useCallback } from 'react';
+
 interface SortSelector {
   selectedSort: string;
   setSelectedSort: React.Dispatch<React.SetStateAction<string>>;
-  onSort: (selectedSort: string) => void;
 }
 
-export const SortSelector = ({
+export const SortSelector = memo(function SortSelector({
   selectedSort,
   setSelectedSort,
-  onSort,
-}: SortSelector) => {
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSort(e.target.value);
-    console.log(e.target.value);
-    onSort(e.target.value);
-  };
+}: SortSelector) {
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedSort(e.target.value);
+    },
+    [setSelectedSort]
+  );
 
   return (
     <div>
@@ -26,4 +27,4 @@ export const SortSelector = ({
       </select>
     </div>
   );
-};
+});

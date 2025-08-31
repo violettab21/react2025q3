@@ -1,14 +1,16 @@
+import { memo } from 'react';
+
 interface YearSelector {
   years: number[];
   selectedYear: number;
   onYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const YearSelector = ({
+export const YearSelector = memo(function YearSelector({
   years,
   selectedYear,
   onYearChange,
-}: YearSelector) => {
+}: YearSelector) {
   return (
     <div>
       <label htmlFor="year">Year</label>
@@ -21,4 +23,4 @@ export const YearSelector = ({
       </select>
     </div>
   );
-};
+});

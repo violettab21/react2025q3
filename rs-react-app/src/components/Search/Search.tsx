@@ -1,12 +1,14 @@
-export const Search = ({
-  searchValue,
-  setSearchValue,
-  onSearch,
-}: {
+import { memo } from 'react';
+
+interface SearchProps {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-  onSearch: (currentSearchValue: string) => void;
-}) => {
+}
+
+export const Search = memo(function Search({
+  searchValue,
+  setSearchValue,
+}: SearchProps) {
   return (
     <div>
       <input
@@ -14,9 +16,8 @@ export const Search = ({
         value={searchValue}
         onChange={(e) => {
           setSearchValue(e.target.value);
-          onSearch(e.target.value);
         }}
       />
     </div>
   );
-};
+});

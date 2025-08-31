@@ -1,17 +1,22 @@
+import { useCallback } from 'react';
 import './columnsList.css';
 import { Checkbox } from './parts/Checkbox';
 
-const columns = ['methane', 'oil_co2', 'temperature_change_from_co2'];
+/*const columns = ['methane', 'oil_co2', 'temperature_change_from_co2'];*/
 
 export const ColumnsList = ({
   selectedItems,
   setSelectedItems,
+  columns,
 }: {
   selectedItems: string[];
   setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
+  columns: Set<string>;
 }) => {
-  const isSelected = (value: string) =>
-    selectedItems.some((element) => element === value);
+  const isSelected = useCallback(
+    (value: string) => selectedItems.some((element) => element === value),
+    [selectedItems]
+  );
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const modifiedValue = e.target.value;
@@ -27,7 +32,7 @@ export const ColumnsList = ({
 
   return (
     <div className="columnsList">
-      {columns.map((column) => (
+      {Array.from(columns).map((column) => (
         <Checkbox
           key={column}
           value={column}

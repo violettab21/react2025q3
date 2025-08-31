@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import './App.css';
 import { Loader } from './components/Loader/Loader';
-const Countries = lazy(() => import('./components/Countries'));
+const Countries = lazy(() => import('./components/Countries/Countries'));
 
 function App() {
   return (
