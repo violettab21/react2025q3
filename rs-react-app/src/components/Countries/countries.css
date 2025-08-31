@@ -1,0 +1,53 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.countriesContainer {
+  display: flex;
+  justify-content: start;
+  width: 60%;
+  overflow-x: scroll;
+}
+
+.countriesTable {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+}
+
+thead {
+  background-color: #577055;
+}
+tbody {
+  background-color: #ddf5dc;
+}
+
+th,
+td {
+  padding: 0.5rem;
+}
+
+label {
+  margin-right: 0.5rem;
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+input,
+select {
+  padding: 0.3rem;
+}
