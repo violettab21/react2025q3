@@ -16,8 +16,8 @@ export default function DetailsLayout({
       <StoreProvider>
         {' '}
         <div className="block">
-          <div>{mainPage}</div>
-          <div>{character}</div>
+          <div className="characters">{mainPage}</div>
+          <div className="character">{character}</div>
           {children}
         </div>
       </StoreProvider>

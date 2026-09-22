@@ -17,20 +17,16 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
         <CloseButton />
         <>
           <div className="characterImageContainer">
-            <Image
+            <h2>{character.name}</h2>
+            <img
               src={character.image}
               alt="character image"
               className="characterImage"
-              width={300}
-              height={200}
-              priority
+          
             />
           </div>
 
           <div className="characterDetailsInfo">
-            <p>
-              {t('name')}: {character.name}
-            </p>
             <p>
               {t('gender')}: {character.gender}
             </p>

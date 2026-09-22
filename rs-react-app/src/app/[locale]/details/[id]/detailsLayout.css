@@ -1,3 +1,14 @@
 .block {
   display: flex;
+  width: 100%;
+}
+
+.character {
+width: 40%;
+height: 100%;
+}
+
+.characters {
+width: 60%;
+
 }

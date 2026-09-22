@@ -24,13 +24,13 @@ export const CharacterCard = ({ character }: { character: Character }) => {
       data-testid="card"
       className={`cardContainer cardContainer-${theme.theme}`}
     >
-      <div className="characterInfo">
-        <p>
-          {t('name')}: {character.name}
-        </p>
-        <p>
-          {t('gender')}: {character.gender}
-        </p>
+      <div className="characterCardInfo">
+        <div className='characterCardImage'> <img src={character.image}></img></div>
+       <div className='characterCardData'>  <h2>
+         {character.name}
+        </h2>
+       </div>
+      
       </div>
     </button>
   );
