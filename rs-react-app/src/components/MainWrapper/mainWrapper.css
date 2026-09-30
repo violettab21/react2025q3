@@ -1,18 +1,17 @@
 .main {
- 
   display: flex;
   justify-content: flex-start;
-  height: calc(100vh - 2.5rem);
+  min-height: calc(100vh - 2.5rem);
   margin-top: 2.5rem;
   width: 100%;
 }
 
 .main-light {
-  background-color: white;
+  background-color: #ededff;
   color: black;
 }
 
 .main-dark {
-  background-color: #24282a;
+  background-color: #222330;
   color: white;
 }

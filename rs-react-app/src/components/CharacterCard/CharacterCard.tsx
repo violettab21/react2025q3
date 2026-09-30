@@ -25,12 +25,14 @@ export const CharacterCard = ({ character }: { character: Character }) => {
       className={`cardContainer cardContainer-${theme.theme}`}
     >
       <div className="characterCardInfo">
-        <div className='characterCardImage'> <img src={character.image}></img></div>
-       <div className='characterCardData'>  <h2>
-         {character.name}
-        </h2>
-       </div>
-      
+        <div className="characterCardImage">
+          {' '}
+          <img src={character.image}></img>
+        </div>
+        <div className="characterCardData">
+          {' '}
+          <h2 className="characterName">{character.name}</h2>
+        </div>
       </div>
     </button>
   );

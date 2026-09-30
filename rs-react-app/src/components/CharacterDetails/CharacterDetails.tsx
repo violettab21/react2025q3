@@ -1,7 +1,6 @@
 import './characterDetails.css';
 
 import { Character } from '../../types';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { CloseButton } from './parts/CloseButton';
@@ -18,29 +17,31 @@ export const CharacterDetails = ({ character }: { character: Character }) => {
         <>
           <div className="characterImageContainer">
             <h2>{character.name}</h2>
-            <img
-              src={character.image}
-              alt="character image"
-              className="characterImage"
-          
-            />
+            <div className="characterDetailsImage">
+              {' '}
+              <img
+                src={character.image}
+                alt="character image"
+                className="characterImage"
+              />
+            </div>
           </div>
 
           <div className="characterDetailsInfo">
             <p>
-              {t('gender')}: {character.gender}
+              <b>{t('gender')}:</b> {character.gender}
             </p>
             <p>
-              {t('species')}: {character.species}
+              <b>{t('species')}:</b> {character.species}
             </p>
             <p>
-              {t('location')}: {character.location.name}
+              <b>{t('location')}:</b> {character.location.name}
             </p>
             <p>
-              {t('origin')}: {character.origin.name}
+              <b>{t('origin')}:</b> {character.origin.name}
             </p>
             <p>
-              {t('status')}:{character.status}
+              <b>{t('status')}:</b> {character.status}
             </p>
           </div>
         </>

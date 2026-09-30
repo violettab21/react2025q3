@@ -10,11 +10,15 @@
 }
 
 .header-light {
-  background-color: #a9bfcc;
+  background-color: #9da8ff;
 }
 
 .header-dark {
-  background-color: #393f42;
+  background-color: #3e415e;
+}
+
+.header-dark a {
+  color: white;
 }
 
 .themeIcon {
@@ -52,4 +56,12 @@
 .link {
   text-decoration: none;
   color: black;
+}
+
+.languageList {
+  background-color: #cacfff;
+  border: none;
+  border-radius: 4px;
+  padding: 2px;
+  font-family: 'Montserrat', sans-serif;
 }

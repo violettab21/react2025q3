@@ -38,6 +38,7 @@ export const Header = () => {
           </li>
           <li className={`menuItem`}>
             <select
+              className="languageList"
               defaultValue={locale}
               onChange={(e) => {
                 const page = searchParams.get('page');
@@ -54,6 +55,7 @@ export const Header = () => {
           <li className={`menuItem`}>
             <button className="theme" onClick={changeTheme}>
               <Image
+                width={20}
                 className="themeIcon"
                 src={currentTheme.theme === 'light' ? lightTheme : darkTheme}
                 alt="theme icon"

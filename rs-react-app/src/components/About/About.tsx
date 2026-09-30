@@ -9,7 +9,7 @@ export const About = () => {
       <p>{t('author')}</p>
       <p>{t('aboutText')}</p>
       <p>
-        {t('label')}
+        {t('label')}{' '}
         <Link
           href="https://rs.school/courses/reactjs"
           target="_blank"
