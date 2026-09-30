@@ -17,7 +17,6 @@ export const MainPage = ({
     <div className="mainPage">
       <div className="left">
         <Search />
-
         <div className="resultsBlock">
           <Refresh />
           <Suspense fallback={<Loader />}>
