@@ -3,10 +3,8 @@ import type { Character } from '../../types';
 import './characterCard.css';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 import { useTheme } from '../Theme/Theme';
 export const CharacterCard = ({ character }: { character: Character }) => {
-  const t = useTranslations('CharacterDetails');
   const theme = useTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
