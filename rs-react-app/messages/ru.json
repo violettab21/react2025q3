@@ -1,0 +1,33 @@
+{
+  "MainPage": {
+    "searchText": "Поиска персонажа из 'Рик и Морти'",
+    "searchPlaceholder": "Поиск"
+  },
+  "NotFoundPage": {
+    "text": "Страница не найдена",
+    "button": "На главную"
+  },
+  "AboutPage": {
+    "author": "Автор: Виолетта Бацура",
+    "aboutText": "Это приложение разработано в рамках курса по Реакт чтобы развить навыки React",
+    "label": "Курс",
+    "linkText": "Курс школы RS School React"
+  },
+  "CharacterDetails": {
+    "name": "Имя",
+    "location": "Местоположение",
+    "gender": "Пол",
+    "species": "Вид",
+    "origin": "Происхождение",
+    "status": "Статус"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "about": "Об авторе"
+  },
+  "Flyout": {
+    "text": "элементов выбрано",
+    "unselectAllButton": "Удалить все",
+    "download": "Скачать"
+  }
+}

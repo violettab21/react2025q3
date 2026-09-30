@@ -1,0 +1,33 @@
+{
+  "MainPage": {
+    "searchText": "Search for Rick and Morty character",
+    "searchPlaceholder": "Search"
+  },
+  "NotFoundPage": {
+    "text": "Page is not found",
+    "button": "Go to Home"
+  },
+  "AboutPage": {
+    "author": "Author: Violetta Batsura",
+    "aboutText": "This is application that was developed in scope of React Course to master skills in React",
+    "label": "Course",
+    "linkText": "RS School React course"
+  },
+  "CharacterDetails": {
+    "name": "Name",
+    "location": "Location",
+    "gender": "Gender",
+    "species": "Species",
+    "origin": "Origin",
+    "status": "Status"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "Flyout": {
+    "text": "item(s) selected",
+    "unselectAllButton": "Unselect All",
+    "download": "Download"
+  }
+}

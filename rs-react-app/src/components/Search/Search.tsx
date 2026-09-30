@@ -1,29 +1,29 @@
+'use client';
 import './search.css';
 import { useSearch } from './hooks/useSearch';
+import { useTranslations } from 'next-intl';
 
-export const Search = ({
-  handleSearch,
-}: {
-  handleSearch: (searchTerm: string) => Promise<void>;
-}) => {
+export const Search = () => {
   const {
     searchValue,
     searchCharactersChangeHandler,
     searchCharactersHandler,
-  } = useSearch(handleSearch);
+  } = useSearch();
+
+  const t = useTranslations('MainPage');
 
   return (
     <div className="searchContainer">
-      <p className="searchLabel">Search for Rick and Morty character:</p>
+      <p className="searchLabel">{t('searchText')}:</p>
       <input
         className="searchInput"
-        placeholder="Search"
+        placeholder={t('searchPlaceholder')}
         value={searchValue}
         onChange={searchCharactersChangeHandler}
       ></input>
       <button className="searchButton" onClick={searchCharactersHandler}>
-        Search
-      </button>{' '}
+        {t('searchPlaceholder')}
+      </button>
     </div>
   );
 };
