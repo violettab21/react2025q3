@@ -1,21 +1,20 @@
+'use client';
 import './pagination.css';
 import { usePagination } from './hooks/usePagination';
 
 export const Pagination = ({
   pageCount,
   currentPage,
-  setCurrentPage,
 }: {
   pageCount: number;
   currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const {
     prevButtonHandler,
     nextButtonHandler,
     pageButtonHandler,
     getPageNumberArray,
-  } = usePagination(pageCount, currentPage, setCurrentPage);
+  } = usePagination(pageCount, currentPage);
 
   return (
     <div className="paginationContainer">

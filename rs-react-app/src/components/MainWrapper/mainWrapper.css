@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.main-light {
+  background-color: #ededff;
+  color: black;
+}
+
+.main-dark {
+  background-color: #222330;
+  color: white;
+}

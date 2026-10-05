@@ -1,24 +1,37 @@
 .mainPage {
-  position: relative;
-
   display: flex;
   justify-content: flex-start;
   border-radius: 10px;
-
   gap: 1rem;
+  padding: 10px;
+  width: 100%;
 }
 
-.refreshButton {
-  margin-bottom: 1rem;
+.left {
+  width: 100%;
 }
+
 .refreshButton {
   padding: 0.5rem;
   border: none;
-  border-radius: 6px;
-  background-color: rgb(142, 201, 235);
+  border-radius: 50%;
+  background-color: #b3b9ff;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 .refresh {
   width: 20px;
+  height: 20px;
+}
+
+.resultsBlock {
+  display: flex;
+  flex-direction: column;
 }
