@@ -1,5 +1,5 @@
 .header {
-  position: fixed;
+  position: sticky;
   display: flex;
   top: 0;
   width: 100%;
